@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns="http://www.springframework.org/schema/beans"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans
+        http://www.springframework.org/schema/beans/spring-beans.xsd">
+
+    <bean id="acquaintance" class="ru.otus.elena.studentiqtest.acquaintance.AcquaintanceImpl"></bean>
+    <bean id="iQTest" class="ru.otus.elena.studentiqtest.iqtest.IQTestImpl"></bean>
+    <bean id="testResult" class="ru.otus.elena.studentiqtest.testresult.TestResultImpl"></bean>    
+    <bean id="studentIQTest" class="ru.otus.elena.studentiqtest.StudentIQTestImpl">
+        <constructor-arg name="acquaintance" ref="acquaintance"/>
+        <constructor-arg name="iQTest" ref="iQTest"/>
+        <constructor-arg name="testResult" ref="testResult"/>
+    </bean>    
+</beans>
