@@ -20,7 +20,7 @@ public class TestResultImpl implements TestResult {
                 System.out.println(person.getPersonName() + ", you are a good studetnt, but I would like to advise your to prepare better next time. Your result " + result);
                 break;
             case 4:
-                System.out.println(person.getPersonName() + ", your IQ is high enought! Your result = " + result);
+                System.out.println(person.getPersonName() + ", your IQ is high enough! Your result = " + result);
                 break;
             case 5:
                 System.out.println(person.getPersonName() + ", you are very clever! Your result = " + result);
