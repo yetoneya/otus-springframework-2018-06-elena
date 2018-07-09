@@ -8,7 +8,7 @@ public class TestResultImpl implements TestResult {
     public void printTestResult(Person person, int result) {
         switch (result) {
             case 0:
-                System.out.println(person.getPersonName() + ", I wonder, how had you been managed to get our university??? Your result = " + result);
+                System.out.println(person.getPersonName() + ", I wonder, how have you been managed to get our university??? Your result = " + result);
                 break;
             case 1:
                 System.out.println(person.getPersonName() + ", are you sure, you are appropriate to your speciality? Your result = " + result);
