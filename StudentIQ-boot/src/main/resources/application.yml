@@ -1,0 +1,5 @@
+application:
+    language: en    
+    en-file: src/main/resources/questions_en.csv
+    ru-file: src/main/resources/questions_rus.csv
+    
