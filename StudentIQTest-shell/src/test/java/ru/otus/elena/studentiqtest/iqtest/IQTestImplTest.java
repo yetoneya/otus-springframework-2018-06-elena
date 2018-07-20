@@ -15,10 +15,13 @@ import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.shell.jline.InteractiveShellApplicationRunner;
+import org.springframework.shell.jline.ScriptShellApplicationRunner;
 import org.springframework.test.context.junit4.SpringRunner;
 
 @RunWith(SpringRunner.class)
-@SpringBootTest
+@SpringBootTest(properties={InteractiveShellApplicationRunner.SPRING_SHELL_INTERACTIVE_ENABLED+"=false",
+    ScriptShellApplicationRunner.SPRING_SHELL_SCRIPT_ENABLED+"=false"})
 public class IQTestImplTest {
     
     public IQTestImplTest() {
@@ -29,6 +32,7 @@ public class IQTestImplTest {
     @Test
     public void testIQtest() throws IOException{
         try {
+            iqt.setLanguage("ru");
             Method methodReadCSV = IQTestImpl.class.getDeclaredMethod("readCSV");
             methodReadCSV.setAccessible(true);
             Map<String, Integer> map = (Map<String, Integer>) methodReadCSV.invoke(iqt);

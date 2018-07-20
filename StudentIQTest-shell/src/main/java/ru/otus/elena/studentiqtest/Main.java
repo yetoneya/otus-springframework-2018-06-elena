@@ -6,6 +6,7 @@ import java.io.FileNotFoundException;
 import java.io.IOException;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.springframework.context.ConfigurableApplicationContext;
 import org.springframework.context.MessageSource;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.support.PropertySourcesPlaceholderConfigurer;
@@ -17,7 +18,7 @@ import org.springframework.context.support.ReloadableResourceBundleMessageSource
 public class Main {
 
     public static void main(String[] args) throws FileNotFoundException, IOException {
-        SpringApplication.run(Main.class, args);        
+        ConfigurableApplicationContext context=SpringApplication.run(Main.class, args);        
 
     }
 
