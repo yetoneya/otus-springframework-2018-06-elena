@@ -1,47 +1,71 @@
 
 package ru.otus.elena.bookcatalogue.domain;
 
-import java.util.ArrayList;
+import java.io.Serializable;
+import java.util.Collection;
 import java.util.Objects;
-import ru.otus.elena.bookcatalogue.dataset.DataSet;
+import javax.persistence.CascadeType;
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.FetchType;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.OneToMany;
+import javax.persistence.Table;
 
-public class Book extends DataSet{
+
+@Entity
+@Table(name="book")
+public class Book implements Serializable{
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "id")
+    private int id;
+    @Column(name = "name")
     private String name;
+    @Column(name = "genre")
     private String genre;
-    private ArrayList<Author>authors;
+    @OneToMany(cascade=CascadeType.ALL,fetch = FetchType.EAGER,targetEntity = Author.class,orphanRemoval = true)    
+    private Collection<Author>authors;
 
-    public Book(String name, String genre, ArrayList<Author> authors) {
-        super(0);
+    public Book() {
+    }
+
+    public Book(String name, String genre, Collection<Author> authors) {
+        this.id=0;
         this.name = name;
         this.genre = genre;
         this.authors = authors;
+        authors.forEach(a->a.setBook(this));
     }
 
-    public Book(String name, String genre, ArrayList<Author> authors, long id) {
-        super(id);
+    public Book(String name, String genre, Collection<Author> authors, int id) {
         this.name = name;
         this.genre = genre;
         this.authors = authors;
+        this.id=id;
+        authors.forEach(a->a.setBook(this));
     }
     
     
-
     public String getName() {
         return name;
     }
 
+   
     public String getGenre() {
         return genre;
     }
 
-    public ArrayList<Author> getAuthors() {
+    
+    public Collection<Author> getAuthors() {
         return authors;
     }
-     
 
-    @Override
-    public long getId() {
-        return super.getId();
+
+    public int getId() {
+        return id;
     }
 
     @Override

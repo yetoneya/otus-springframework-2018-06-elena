@@ -3,6 +3,7 @@ package ru.otus.elena.bookcatalogue.shell;
 
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Collection;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
@@ -10,17 +11,17 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.shell.standard.ShellComponent;
 import org.springframework.shell.standard.ShellMethod;
 import org.springframework.shell.standard.ShellOption;
-import ru.otus.elena.bookcatalogue.dao.BookDaoJdbc;
+import ru.otus.elena.bookcatalogue.dao.BookDao;
 import ru.otus.elena.bookcatalogue.domain.Author;
 import ru.otus.elena.bookcatalogue.domain.Book;
 
 @ShellComponent
 public class ShellCommands {
     
-    private final BookDaoJdbc bookDao;
+    private final BookDao bookDao;
     
     @Autowired
-    public ShellCommands(BookDaoJdbc bookDao) {
+    public ShellCommands(BookDao bookDao) {
         this.bookDao = bookDao;
     }
     
@@ -57,21 +58,25 @@ public class ShellCommands {
             @ShellOption String genre,
             @ShellOption String... authors) {
         List<String> list = Arrays.asList(authors);
-        ArrayList<Author> authorList = new ArrayList<>();
+        Collection<Author> authorList = new ArrayList<>();
         list.forEach(author -> {
             authorList.add(new Author(author));
         });
-        Book book = new Book(name, genre, authorList);
-        long result=bookDao.insert(book);
+        Book book = new Book(name, genre, authorList);       
+        int result=bookDao.insert(book);
         return "saved with id: "+ result;
     }
 
     @ShellMethod("Delete")
-    public String delete(@ShellOption long id) {
-        int result=bookDao.delete(id);
-        return "deleted: "+result+" elements";
+    public String delete(@ShellOption int id) {
+        int result = bookDao.delete(id);
+        if (result == 1) {
+            return "deleted";
+        } else {
+            return "has not been deleted";
+        }
     }
-    
+
     @ShellMethod("Read all")
     public String all() {
         List<Book> books = bookDao.getAll();
@@ -102,7 +107,7 @@ public class ShellCommands {
 
     @ShellMethod("Count")
     public String count() {
-        int result = bookDao.count();
+        long result = bookDao.count();
         return String.valueOf(result);
     }
 

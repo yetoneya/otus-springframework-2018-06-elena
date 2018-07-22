@@ -6,15 +6,15 @@ import ru.otus.elena.bookcatalogue.domain.Book;
 
 public interface BookDao {
 
-    public int count();
+    public long count();
 
-    public long insert(Book person);
+    public int insert(Book book);
 
-    public Book getById(long id);
+    public Book getById(int id);
 
     public List<Book> getAll();
     
-    public int delete(long id);
+    public int delete(int id);
     
     public List<Book> getByName(String name);
     
