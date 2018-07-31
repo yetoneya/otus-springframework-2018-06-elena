@@ -45,6 +45,9 @@ public class BookDaoJpaTest {
         int id=bookDao.insert(book);
         Book rebook=bookDao.getById(id);
         assertEquals(book,rebook);
+        rebook.getComments().add("very nice");
+        int reId=bookDao.insert(rebook);
+        assertEquals(id,reId);
     }
 
     @Test
