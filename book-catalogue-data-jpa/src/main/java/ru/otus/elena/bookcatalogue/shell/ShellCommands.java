@@ -1,4 +1,3 @@
- 
 package ru.otus.elena.bookcatalogue.shell;
 
 import java.util.ArrayList;
@@ -17,14 +16,14 @@ import ru.otus.elena.bookcatalogue.domain.Book;
 
 @ShellComponent
 public class ShellCommands {
-    
+
     private final BookRepository bookRepository;
-    
+
     @Autowired
     public ShellCommands(BookRepository bookDao) {
         this.bookRepository = bookDao;
     }
-    
+
     @ShellMethod("ReadByName")
     public String byname(
             @ShellOption String name
@@ -63,9 +62,9 @@ public class ShellCommands {
         list.forEach(author -> {
             authorList.add(new Author(author));
         });
-        Book book = new Book(name, genre, authorList);       
-        Book saved=bookRepository.save(book);
-        return "saved with id: "+ saved.getId();
+        Book book = new Book(name, genre, authorList);
+        Book saved = bookRepository.save(book);
+        return "saved with id: " + saved.getId();
     }
 
     @ShellMethod("Delete")
@@ -87,7 +86,7 @@ public class ShellCommands {
             return "empty";
         }
     }
-    
+
     @ShellMethod("Genre")
     public String genre(@ShellOption String genre) {
         List<Book> books = bookRepository.findByGenre(genre);
@@ -107,14 +106,14 @@ public class ShellCommands {
         long result = bookRepository.count();
         return String.valueOf(result);
     }
-    
+
     @ShellMethod("Read comment")
     public String read_comment(
             @ShellOption int id) {
-        Book book=null;
+        Book book = null;
         Optional<Book> optionalBook = bookRepository.findById(id);
         if (optionalBook.isPresent()) {
-        book=optionalBook.get();
+            book = optionalBook.get();
         } else {
             return "doesn't exist";
         }
@@ -131,17 +130,16 @@ public class ShellCommands {
     public String add_comment(
             @ShellOption int id,
             @ShellOption String comment) {
-        Book book=null;
+        Book book = null;
         Optional<Book> optionalBook = bookRepository.findById(id);
         if (optionalBook.isPresent()) {
-        book=optionalBook.get();
+            book = optionalBook.get();
         } else {
             return "doesn't exist";
         }
-        book.getComments().add(comment);      
+        book.getComments().add(comment);
         bookRepository.save(book);
         return "comment has been added";
     }
-
 
 }

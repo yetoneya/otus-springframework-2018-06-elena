@@ -1,4 +1,3 @@
-
 package ru.otus.elena.bookcatalogue.domain;
 
 import java.io.Serializable;
@@ -16,10 +15,10 @@ import javax.persistence.Id;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
-
 @Entity
-@Table(name="book")
-public class Book implements Serializable{
+@Table(name = "book")
+public class Book implements Serializable {
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id")
@@ -28,39 +27,36 @@ public class Book implements Serializable{
     private String name;
     @Column(name = "genre")
     private String genre;
-    @OneToMany(cascade=CascadeType.ALL,fetch = FetchType.EAGER,targetEntity = Author.class,orphanRemoval = true)    
-    private Collection<Author>authors;
+    @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER, targetEntity = Author.class, orphanRemoval = true)
+    private Collection<Author> authors;
     @Basic
-    @Column(name="comment")
-    private ArrayList<String>comments;
-    
+    @Column(name = "comment")
+    private ArrayList<String> comments;
+
     public Book() {
     }
 
     public Book(String name, String genre, Collection<Author> authors) {
-        this.id=0;
         this.name = name;
         this.genre = genre;
         this.authors = authors;
-        comments=new ArrayList<>();
-        authors.forEach(a->a.setBook(this));
+        comments = new ArrayList<>();
+        authors.forEach(a -> a.setBook(this));
     }
 
     public Book(String name, String genre, Collection<Author> authors, int id) {
         this.name = name;
         this.genre = genre;
         this.authors = authors;
-        this.id=id;
-        comments=new ArrayList<>();
-        authors.forEach(a->a.setBook(this));
+        this.id = id;
+        comments = new ArrayList<>();
+        authors.forEach(a -> a.setBook(this));
     }
-    
-    
+
     public String getName() {
         return name;
     }
 
-   
     public String getGenre() {
         return genre;
     }
@@ -74,7 +70,6 @@ public class Book implements Serializable{
         return comments;
     }
     
-
     public int getId() {
         return id;
     }
@@ -85,8 +80,13 @@ public class Book implements Serializable{
             return false;
         }
         Book other = (Book) obj;
-        return Objects.equals(name, other.getName()) && 
-                Objects.equals(genre, other.getGenre())&& Objects.equals(authors.toString(),other.getAuthors().toString());
+        return Objects.equals(name, other.getName())
+                && Objects.equals(genre, other.getGenre()) && Objects.equals(authors.toString(), other.getAuthors().toString());
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(name, genre, authors);
     }
 
     @Override
@@ -94,7 +94,7 @@ public class Book implements Serializable{
         System.out.println(comments);
         StringBuilder builder = new StringBuilder("Book: name = " + name + " genre = " + genre);
         authors.forEach(author -> builder.append(" ").append(author.toString()));
-        builder.append(" id=").append(id);       
+        builder.append(" id=").append(id);
         return builder.toString();
     }
 

@@ -15,7 +15,7 @@ import ru.otus.elena.bookcatalogue.domain.Book;
 
 @RunWith(SpringRunner.class)
 @DataJpaTest
-@AutoConfigureTestDatabase(connection=EmbeddedDatabaseConnection.H2)
+@AutoConfigureTestDatabase(connection = EmbeddedDatabaseConnection.H2)
 public class BookRepositoryTest {
 
     @Autowired
@@ -66,6 +66,4 @@ public class BookRepositoryTest {
         assertEquals(book, rebook);
     }
 
-
-    
 }
