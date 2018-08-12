@@ -38,7 +38,6 @@ public class Book implements Serializable{
     }
 
     public Book(String name, String genre, Collection<Author> authors) {
-        this.id=0;
         this.name = name;
         this.genre = genre;
         this.authors = authors;
@@ -87,6 +86,11 @@ public class Book implements Serializable{
         Book other = (Book) obj;
         return Objects.equals(name, other.getName()) && 
                 Objects.equals(genre, other.getGenre())&& Objects.equals(authors.toString(),other.getAuthors().toString());
+    }
+    
+    @Override
+    public int hashCode() {
+        return Objects.hash(name, genre, authors);
     }
 
     @Override
