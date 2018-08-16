@@ -1,0 +1,10 @@
+## YAML Template.
+---
+spring:
+   data:            
+      mongodb.host: localhost
+      mongodb.port: 0
+      mongodb.uri: mongodb://localhost/test
+      mongo.repositories.enabled: true
+
+      
