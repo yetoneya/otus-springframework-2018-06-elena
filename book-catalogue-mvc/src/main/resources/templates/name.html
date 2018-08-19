@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+    <head>
+        <title>Find by name</title>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <style type="text/css">
+            body {
+                padding: 50px;
+            }
+            label {
+                display: inline-block;
+                width: 100px;
+            }
+            .row {
+                margin-top: 10px;
+                margin-left: 5px;
+            }
+
+            .submit{
+                text-align: center;
+                width: 45px;
+                border: 3px solid #bbc8d0;
+
+            }
+        </style>
+    </head>
+    <body>
+        <form th:action="@{/byname(name=${name})}" action="list.html">
+            <div class="row">
+                <label for="name">name:</label>
+                <input id="name" type="text" name="name" value="name"/>
+            </div>
+            <br>
+            <input class="submit" type="submit" value="find"/>
+        </form>
+    </body>
+</html>

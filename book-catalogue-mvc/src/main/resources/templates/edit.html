@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+    <head>
+        <meta charset="UTF-8"/>
+        <title>Edit book</title>
+        <style type="text/css">
+            body {
+                padding: 50px;
+            }
+            label {
+                display: inline-block;
+                width: 100px;
+            }
+            input:read-only {
+                background: #bbc8d0;
+            }
+            .row {
+                margin-top: 10px;
+                margin-left: 5px;
+            }
+            .table{
+                margin-top: 10px;             
+            }
+            .submit{
+                text-align: center;
+                width: 45px;
+                border: 3px solid #bbc8d0;
+                
+            }
+        </style>
+    </head>
+    <body>
+        <!-- Person edition -->
+        <form id="edit-form"  th:object="${book}" th:action="@{/save}" th:method="post" action="list.html">
+            <h1>book info:</h1>
+            <div class="row">
+                <label for="id-input"> id:</label>
+                <input id="id-input" type="text" readonly="readonly" th:field="*{id}" value="1"/>
+            </div>
+            <div class="row">
+                <label for="name-input"> name:</label>
+                <input id="name-input" type="text" th:field="*{name}" value="book"/>
+            </div>
+            <div class="row">
+                <label for="genre-input"> genre:</label>
+                <input id="genre-input" type="text" th:field="*{genre}" value="genre"/>
+            </div>
+            <div class="row">
+                <label for="authors-input"> authors:</label>
+                <input id="authors-input" type="text" th:field="*{authors}" value="authors"/>
+            </div>
+            <table>              
+                <tr th:each="comment, stat : *{comments}">                   
+                    <td><input type="hidden" th:field="*{comments[__${stat.index}__]}" /></td>
+                </tr>
+            </table>
+            <br>  
+            <div class="submit">
+                <input type="submit" value="save"/>
+            </div>
+        </form>
+    </body>
+</html>
