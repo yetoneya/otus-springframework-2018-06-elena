@@ -27,7 +27,7 @@ public class BookRepositoryTest {
     public void testExample() throws Exception {
         Book book = new Book("masha_v_derevne", "fantasy", "petrov, sidorov");
         entityManager.persist(book);
-        Book rebook = repository.findById(1).get();
+        Book rebook = repository.findById(3).get();
         assertEquals(book, rebook);
     }
 
