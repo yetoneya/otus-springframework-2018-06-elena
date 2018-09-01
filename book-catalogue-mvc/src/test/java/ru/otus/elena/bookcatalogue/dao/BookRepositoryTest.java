@@ -1,8 +1,8 @@
 package ru.otus.elena.bookcatalogue.dao;
 
-import java.util.ArrayList;
 import org.junit.Test;
 import static org.junit.Assert.*;
+import org.junit.Before;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.jdbc.EmbeddedDatabaseConnection;
@@ -23,11 +23,16 @@ public class BookRepositoryTest {
     @Autowired
     private BookRepository repository;
 
+    @Before
+    public void setUp() {
+        repository.deleteAll();
+    }
+
     @Test
     public void testExample() throws Exception {
         Book book = new Book("masha_v_derevne", "fantasy", "petrov, sidorov");
         entityManager.persist(book);
-        Book rebook = repository.findById(3).get();
+        Book rebook = repository.findById(book.getId()).get();
         assertEquals(book, rebook);
     }
 
@@ -45,8 +50,10 @@ public class BookRepositoryTest {
     public void testFindByGenre() {
         System.out.println("findByGenre");
         Book book = new Book("masha_v_derevne", "fantasy", "petrov, sidorov");
+        System.out.println(book);
         entityManager.persist(book);
         Book rebook = repository.findByGenre("fantasy").get(0);
+        System.out.println(rebook);
         assertEquals(book, rebook);
     }
 

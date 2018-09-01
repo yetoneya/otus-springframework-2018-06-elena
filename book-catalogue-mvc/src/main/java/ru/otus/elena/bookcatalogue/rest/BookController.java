@@ -1,6 +1,5 @@
 package ru.otus.elena.bookcatalogue.rest;
 
-import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -24,7 +23,7 @@ public class BookController {
     }
 
     @GetMapping("/")
-    public String listPage(Model model) {
+    public String bookPage(Model model) {
         List<Book> books = (List<Book>) repository.findAll();
         model.addAttribute("books", books);
         return "list";
@@ -40,21 +39,19 @@ public class BookController {
         return "name";
     }
 
-    @RequestMapping("/byname")
-    public String findByName(String name, Model model) {
+    @GetMapping("/byname")
+    public String findByName(@RequestParam("name")String name, Model model) {
         List<Book> books = (List<Book>) repository.findByName(name);
         model.addAttribute("books", books);
         return "list";
     }
 
-    @RequestMapping("/bygenre")
-    public String findByGenre(String genre, Model model) {
+    @GetMapping("/bygenre")
+    public String findByGenre(@RequestParam("genre")String genre, Model model) {
         List<Book> books = (List<Book>) repository.findByGenre(genre);
         model.addAttribute("books", books);
         return "list";
     }
-
-
 
     @GetMapping("/edit")
     public String editPage(@RequestParam("id") int id, Model model) {
@@ -75,13 +72,17 @@ public class BookController {
 
     @GetMapping("/comment")
     public String commentPage(@RequestParam("id") int id, Model model) {
-        Book book = repository.findById(id).orElseThrow(NotFoundException::new);
-        model.addAttribute("book", book);
-        return "comment";
+        try {
+            Book book = repository.findById(id).orElseThrow(NotFoundException::new);
+            model.addAttribute("book", book);
+            return "comment";
+        } catch (NotFoundException nfe) {
+            return "notfound";
+        }
     }
 
     @RequestMapping("/save")
-    public String saveBook(@ModelAttribute("book") Book book, Model model) {
+    public String savePage(@ModelAttribute("book") Book book, Model model) {
         if (!book.getComments().isEmpty() && book.getId() != 0) {
             Iterator<String> itc = book.getComments().iterator();
             while (itc.hasNext()) {
