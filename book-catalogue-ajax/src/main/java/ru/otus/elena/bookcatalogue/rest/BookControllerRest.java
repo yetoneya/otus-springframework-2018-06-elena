@@ -36,24 +36,18 @@ public class BookControllerRest {
         return new ResponseEntity<Book>(book, HttpStatus.OK);
     }
 
-    @RequestMapping("/byid")
-    public ResponseEntity<Book> findById(@RequestParam(value = "id") int id) {
-        try {
-            Book book = repository.findById(id).orElseThrow(NotFoundException::new);
-            return new ResponseEntity<>(book, HttpStatus.OK);
-        } catch (Exception e) {
-            return new ResponseEntity<>(null, HttpStatus.OK);
-        }
-    }
-
     @PostMapping("/edit")
     public ResponseEntity<Book> editBook(@RequestBody BookDto bookdto) {
-        Book book = repository.findById(bookdto.getId()).orElseThrow(NotFoundException::new);
-        book.setName(bookdto.getName());
-        book.setGenre(bookdto.getGenre());
-        book.setAuthors(bookdto.getAuthors());
-        repository.save(book);
-        return new ResponseEntity<Book>(book, HttpStatus.OK);
+        try {
+            Book book = repository.findById(bookdto.getId()).orElseThrow(NotFoundException::new);
+            book.setName(bookdto.getName());
+            book.setGenre(bookdto.getGenre());
+            book.setAuthors(bookdto.getAuthors());
+            repository.save(book);
+            return new ResponseEntity<>(book, HttpStatus.OK);
+        } catch (NotFoundException nfe) {
+            return new ResponseEntity<>(new Book("", "", ""), HttpStatus.OK);
+        }
     }
 
     @RequestMapping("/delete")
@@ -67,6 +61,16 @@ public class BookControllerRest {
             return new ResponseEntity<>(id, HttpStatus.OK);
         } catch (Exception e) {
             return new ResponseEntity<>(-1, HttpStatus.OK);
+        }
+    }
+
+    @RequestMapping("/byid")
+    public ResponseEntity<Book> findById(@RequestParam(value = "id") int id) {
+        try {
+            Book book = repository.findById(id).orElseThrow(NotFoundException::new);
+            return new ResponseEntity<>(book, HttpStatus.OK);
+        } catch (Exception e) {
+            return new ResponseEntity<>(new Book("", "", ""), HttpStatus.OK);
         }
     }
 

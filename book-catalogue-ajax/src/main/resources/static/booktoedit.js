@@ -11,7 +11,7 @@ $(document).ready(function () {
                 id: id
             },
             success: function (data) {
-                if (data !== null) {
+                if (data.id !== 0) {
                     $("#edit-id").val(data.id);
                     $("#edit-name").val(data.name);
                     $("#edit-genre").val(data.genre);

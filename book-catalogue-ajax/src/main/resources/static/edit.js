@@ -14,9 +14,12 @@ $(document).ready(function () {
             dataType: 'json',
             data: JSON.stringify(bookdto),
             success: function (data) {
-                $("#book-list option[value='" + id + "']").remove();
-                var option = '<option value="' + data.id + '">' + data.id + ". " + data.name + ", " + data.genre + ", " + data.authors + '</option>';
-                $("#book-list").append(option);
+                if (data.id !== 0)
+                {
+                    $("#book-list option[value='" + id + "']").remove();
+                    var option = '<option value="' + data.id + '">' + data.id + ". " + data.name + ", " + data.genre + ", " + data.authors + '</option>';
+                    $("#book-list").append(option);
+                }
             },
             error: function (e) {
 
