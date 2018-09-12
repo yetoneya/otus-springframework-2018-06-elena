@@ -1,0 +1,7 @@
+ru\otus\elena\bookcatalogue\rest\BookController.class
+ru\otus\elena\bookcatalogue\rest\BookControllerRest.class
+ru\otus\elena\bookcatalogue\rest\NotFoundException.class
+ru\otus\elena\bookcatalogue\domain\Book.class
+ru\otus\elena\bookcatalogue\dao\BookRepository.class
+ru\otus\elena\bookcatalogue\Main.class
+ru\otus\elena\bookcatalogue\domain\BookDto.class
