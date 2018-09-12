@@ -5,7 +5,7 @@ import org.springframework.data.mongodb.repository.MongoRepository;
 import org.springframework.data.repository.CrudRepository;
 import ru.otus.elena.bookcatalogue.domain.Book;
 
-public interface BookRepository extends MongoRepository<Book, Integer> {
+public interface BookRepository extends MongoRepository<Book, String> {
 
     public List<Book> findByName(String name);
 
