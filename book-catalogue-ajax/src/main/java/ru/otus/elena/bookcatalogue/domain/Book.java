@@ -48,7 +48,7 @@ public class Book implements Serializable {
         this.authors = authors;
     }
 
-    public Book(int id,String name, String genre, String authors, ArrayList<String> comments) {
+    public Book(int id, String name, String genre, String authors, ArrayList<String> comments) {
         this.id = id;
         this.name = name;
         this.genre = genre;
