@@ -1,0 +1,6 @@
+## YAML Template.
+---
+spring:
+   data:      
+      mongodb.uri: mongodb://localhost/test
+     
