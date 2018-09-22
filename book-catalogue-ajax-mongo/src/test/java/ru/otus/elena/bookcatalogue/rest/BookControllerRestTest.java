@@ -83,7 +83,7 @@ public class BookControllerRestTest {
     @Test
     public void deleteTest() throws Exception {
         MediaType type = new MediaType("application", "json", java.nio.charset.Charset.forName("UTF-8"));
-        this.mvc.perform(get("/delete?id=1"))
+        this.mvc.perform(get("/delete").param("id", book.getId()))
                 .andExpect(status().isOk())
                 .andExpect(content().contentType(type));
     }
@@ -91,7 +91,7 @@ public class BookControllerRestTest {
     @Test
     public void findByIdTest() throws Exception {
         MediaType type = new MediaType("application", "json", java.nio.charset.Charset.forName("UTF-8"));
-        this.mvc.perform(get("/byid?id=1")).andExpect(status().isOk())
+        this.mvc.perform(get("/byid").param("id", book.getId())).andExpect(status().isOk())
                 .andExpect(content().contentType(type));
     }
 
@@ -124,16 +124,16 @@ public class BookControllerRestTest {
     }
 
     @Test
-    public void commentTest() throws Exception {
+    public void getCommentsTest() throws Exception {
         MediaType type = new MediaType("application", "json", java.nio.charset.Charset.forName("UTF-8"));
-        this.mvc.perform(get("/comments").param("id","1")).andExpect(status().isOk())
+        this.mvc.perform(get("/comments").param("id",book.getId())).andExpect(status().isOk())
                 .andExpect(content().contentType(type));
     }
 
     @Test
     public void addCommentTest() throws Exception {
         MediaType type = new MediaType("application", "json", java.nio.charset.Charset.forName("UTF-8"));
-        this.mvc.perform(get("/addcomment?id=1&comment=comment")).andExpect(status().isOk())
+        this.mvc.perform(get("/addcomment").param("id", book.getId()).param("comment", "my comment")).andExpect(status().isOk())
                 .andExpect(content().contentType(type));
     }
 }
