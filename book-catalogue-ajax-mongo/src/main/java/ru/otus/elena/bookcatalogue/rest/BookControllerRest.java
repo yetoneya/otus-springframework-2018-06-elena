@@ -103,7 +103,7 @@ public class BookControllerRest {
     }
 
     @RequestMapping("/author")
-    public ResponseEntity<List<BookDto>> findByAuthor(@RequestParam(value = "author") String author) {
+    public ResponseEntity<List<BookDto>> findByAuthors(@RequestParam(value = "author") String author) {
         try {
             List<Book> list = repository.findByAuthors(author);
             List<BookDto> books = list.stream().map(BookDto::toBookDto).collect(toList());
