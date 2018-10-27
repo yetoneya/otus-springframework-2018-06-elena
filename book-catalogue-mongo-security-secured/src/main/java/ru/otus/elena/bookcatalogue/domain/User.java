@@ -1,6 +1,7 @@
 package ru.otus.elena.bookcatalogue.domain;
 
 import java.time.LocalDate;
+import java.util.Objects;
 import java.util.Set;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.index.Indexed;
@@ -76,4 +77,20 @@ public class User {
     public void setRoles(Set<Role> roles) {
         this.roles = roles;
     }
+
+    @Override
+    public boolean equals(Object obj) {
+          if (obj == null || getClass() != obj.getClass()) {
+            return false;
+        }
+        User other = (User) obj;
+        return Objects.equals(username, other.getUsername())&&Objects.equals(password, other.getPassword());
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(username, password);
+    }
+    
+    
 }

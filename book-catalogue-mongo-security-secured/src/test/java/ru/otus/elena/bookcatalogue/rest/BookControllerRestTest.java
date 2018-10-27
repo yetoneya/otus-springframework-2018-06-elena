@@ -55,11 +55,8 @@ public class BookControllerRestTest {
     @Test
     @WithMockUser(username = "admin", roles = {"ADMIN"})
     public void saveBookTest() throws Exception {
-        MediaType type = new MediaType("application", "json", java.nio.charset.Charset.forName("UTF-8"));
-        BookDto bookDto = new BookDto("", "", "", "");
-        this.mvc.perform(MockMvcRequestBuilders.post("/save")
-                .contentType(MediaType.APPLICATION_JSON)
-                .content(objectMapper.writeValueAsString(bookDto)))
+        MediaType type = new MediaType("application", "json", java.nio.charset.Charset.forName("UTF-8"));       
+        this.mvc.perform(MockMvcRequestBuilders.get("/save?name=name&genre=genre&authors=authors&adult=true"))                              
                 .andExpect(status().isOk())
                 .andExpect(content().contentType(type));
 

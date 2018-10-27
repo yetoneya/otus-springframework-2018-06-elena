@@ -14,11 +14,12 @@ public class BookService {
     @Autowired
     private BookRepository bookRepository;
 
+    
     public List<Book> findForAll() {
         List<Book> books = bookRepository.findAll();
         return books.stream().filter(book -> !book.isForAdult()).collect(Collectors.toList());
     }
-    
+
     @Secured("ROLE_ADULT")
     public List<Book> findForAdult() {
         List<Book> books = bookRepository.findAll();

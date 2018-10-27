@@ -1,27 +1,33 @@
-package ru.otus.elena.bookcatalogue.dao;
+package ru.otus.elena.bookcatalogue.service;
 
 import java.util.ArrayList;
-import org.junit.Test;
-import static org.junit.Assert.*;
+import java.util.List;
+import static org.junit.Assert.assertEquals;
 import org.junit.Before;
+import org.junit.Test;
 import org.junit.runner.RunWith;
+import ru.otus.elena.bookcatalogue.dao.BookRepository;
+import ru.otus.elena.bookcatalogue.domain.Book;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.context.properties.ConfigurationProperties;
+import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.data.mongodb.repository.config.EnableMongoRepositories;
+import org.springframework.security.test.context.support.WithMockUser;
 import org.springframework.test.annotation.DirtiesContext;
 import static org.springframework.test.annotation.DirtiesContext.ClassMode.BEFORE_EACH_TEST_METHOD;
-
 import org.springframework.test.context.junit4.SpringRunner;
-import ru.otus.elena.bookcatalogue.domain.Book;
 
 @RunWith(SpringRunner.class)
+@SpringBootTest
+@AutoConfigureMockMvc
 @ConfigurationProperties("application")
 @EnableMongoRepositories
-@SpringBootTest
 @DirtiesContext(classMode = BEFORE_EACH_TEST_METHOD)
-public class BookRepositoryTest {
+public class BookServiceTest {
 
+    @Autowired
+    private BookService bookService;
     @Autowired
     private BookRepository bookRepository;
 
@@ -31,8 +37,9 @@ public class BookRepositoryTest {
     }
 
     @Test
-    public void testFindByName() {
-        System.out.println("findByName");
+    @WithMockUser(username = "admin", roles = {"ADULT"})
+    public void testFindForAdult() {
+        System.out.println("findForAdult");
         Book book = new Book("masha_v_derevne", "fantasy", new ArrayList<String>() {
             {
                 add("vasya");
@@ -40,37 +47,22 @@ public class BookRepositoryTest {
             }
         }, true);
         bookRepository.insert(book);
-        Book rebook = bookRepository.findByName("masha_v_derevne").get(0);
-        assertEquals(book, rebook);
-
+        List<Book> books = bookService.findForAdult();
+        assertEquals(book, books.get(0));
     }
 
-    @Test
-    public void testFindByGenre() {
-        System.out.println("findByGenre");
+    @Test    
+    public void testFindForAll() {
+        System.out.println("findForAll");
         Book book = new Book("masha_v_derevne", "fantasy", new ArrayList<String>() {
             {
                 add("vasya");
                 add("vova");
             }
-        }, true);
+        }, false);
         bookRepository.insert(book);
-        Book rebook = bookRepository.findByGenre("fantasy").get(0);
-        assertEquals(book, rebook);
-    }
-
-    @Test
-    public void testFindByAuthors() {
-        System.out.println("findByAuthors");
-        Book book = new Book("masha_v_derevne", "fantasy", new ArrayList<String>() {
-            {
-                add("vasya");
-                add("vova");
-            }
-        }, true);
-        bookRepository.insert(book);
-        Book rebook = bookRepository.findByAuthors("vasya").get(0);
-        assertEquals(book, rebook);
+        List<Book> books = bookService.findForAll();
+        assertEquals(book, books.get(0));
     }
 
 }

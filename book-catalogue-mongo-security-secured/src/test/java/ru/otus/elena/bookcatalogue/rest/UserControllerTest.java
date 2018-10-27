@@ -40,4 +40,45 @@ public class UserControllerTest {
         this.mvc.perform(get("/userlist")).andExpect(status().isOk())
                 .andExpect(content().contentType(HTML_UTF_8));
     }
+
+    @Test
+    @WithMockUser(username = "vasya")
+    public void homePageTest() throws Exception {
+        MediaType HTML_UTF_8 = new MediaType("text", "html", java.nio.charset.Charset.forName("UTF-8"));
+        this.mvc.perform(get("/")).andExpect(status().isOk())
+                .andExpect(content().contentType(HTML_UTF_8));
+    }
+
+    @Test
+    @WithMockUser(username = "vasya")
+    public void loginPageTest() throws Exception {
+        MediaType HTML_UTF_8 = new MediaType("text", "html", java.nio.charset.Charset.forName("UTF-8"));
+        this.mvc.perform(get("/login")).andExpect(status().isOk())
+                .andExpect(content().contentType(HTML_UTF_8));
+    }
+
+    @Test
+    @WithMockUser(username = "vasya")
+    public void signUpTest() throws Exception {
+        MediaType HTML_UTF_8 = new MediaType("text", "html", java.nio.charset.Charset.forName("UTF-8"));
+        this.mvc.perform(get("/signup")).andExpect(status().isOk())
+                .andExpect(content().contentType(HTML_UTF_8));
+    }
+
+    @Test
+    @WithMockUser(username = "vasya")
+    public void checkTest() throws Exception {
+        MediaType HTML_UTF_8 = new MediaType("text", "html", java.nio.charset.Charset.forName("UTF-8"));
+        this.mvc.perform(get("/check?username=username&birthday=birthday&password=password&repeatpassword=repeatpassword")).andExpect(status().isOk())
+                .andExpect(content().contentType(HTML_UTF_8));
+    }
+
+    @Test
+    @WithMockUser(username = "vasya", authorities = {"ADMIN"})
+    public void logOutTest() throws Exception {
+        MediaType HTML_UTF_8 = new MediaType("text", "html", java.nio.charset.Charset.forName("UTF-8"));
+        this.mvc.perform(get("/logout")).andExpect(status().isOk())
+                .andExpect(content().contentType(HTML_UTF_8));
+    }
+    
 }

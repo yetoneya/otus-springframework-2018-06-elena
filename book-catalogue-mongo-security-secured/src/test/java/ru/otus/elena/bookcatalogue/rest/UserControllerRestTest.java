@@ -47,7 +47,7 @@ public class UserControllerRestTest {
     @Before
     public void setUp() {
         userRepository.deleteAll();
-        Role roleUser=roleRepository.findByRole("USER");
+        Role roleUser = roleRepository.findByRole("USER");
         user = new User("e", LocalDate.of(1971, Month.MARCH, 01), "e", new HashSet<Role>() {
             {
                 add(roleUser);
@@ -61,6 +61,15 @@ public class UserControllerRestTest {
     public void deleteUserTest() throws Exception {
         MediaType type = new MediaType("application", "json", java.nio.charset.Charset.forName("UTF-8"));
         this.mvc.perform(get("/user/delete").param("id", user.getId()))
+                .andExpect(status().isOk())
+                .andExpect(content().contentType(type));
+    }
+
+    @Test
+    @WithMockUser(username = "admin", roles = {"ADMIN"})
+    public void refreshUserTest() throws Exception {
+        MediaType type = new MediaType("application", "json", java.nio.charset.Charset.forName("UTF-8"));
+        this.mvc.perform(get("/user/refresh").param("id", user.getId()))
                 .andExpect(status().isOk())
                 .andExpect(content().contentType(type));
     }

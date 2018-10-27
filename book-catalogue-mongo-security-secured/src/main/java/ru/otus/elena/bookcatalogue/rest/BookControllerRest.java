@@ -30,13 +30,13 @@ public class BookControllerRest {
     }
 
     @RequestMapping("/save")
-    public ResponseEntity<BookDto> saveBook(@RequestParam String name, 
+    public ResponseEntity<BookDto> saveBook(@RequestParam String name,
             @RequestParam String genre, @RequestParam String authors, @RequestParam Boolean adult) {
         ArrayList<String> authorList = new ArrayList<>(Arrays.asList(authors.split(",")));
-        
+
         Book book = new Book(name, genre, authorList, adult);
         bookRepository.save(book);
-        BookDto bookdto=BookDto.toBookDto(book);
+        BookDto bookdto = BookDto.toBookDto(book);
         return new ResponseEntity<BookDto>(bookdto, HttpStatus.OK);
     }
 
