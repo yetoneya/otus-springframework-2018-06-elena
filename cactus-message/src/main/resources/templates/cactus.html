@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html  lang="en" xmlns:th="http://www.thymeleaf.org">
+    <head>
+        <title>Cactus</title>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    </head>
+    <body>
+        <form id="type-select">
+            <h3>choose type</h3>
+            <p><input type ="radio" name = "typeselect" value ="aprocactus" checked = "checked"/>aprocactus</p>
+            <p><input type ="radio" name = "typeselect" value ="astrophytum"/>astrophytum</p>
+            <p><input type ="radio" name = "typeselect" value ="brouningia"/>brouningia</p>
+            <p><input type ="radio" name = "typeselect" value ="cephalocereus"/>cephalocereus</p>
+            <p><input type ="radio" name = "typeselect" value ="cereus"/>cereus</p>
+            <p><input type ="radio" name = "typeselect" value ="cleistocactus"/>cleistocactus</p>
+            <p><input type ="radio" name = "typeselect" value ="disocactus"/>disocactus</p>
+            <p><input type ="radio" name = "typeselect" value ="rebutia"/>rebutia</p>
+            <p><input type ="radio" name = "typeselect" value ="trichocereus"/>trichocereus</p>
+            <p><input type="submit" id ="submit" value = "select"/></p>          
+        </form>
+        <form id = "cactus-select" th:object="${cactus}">
+            <img id="photo" th:src="*{url}" width="200" height="200" src="rebutia_heliosa.jpg"/>
+            <p id="name" th:text = "*{cactusname}">rebutia heliosa</p>
+            <p><input id="cactusname" type="hidden" th:field="*{cactusname}"/></p>
+            <p><input id="url" type="hidden" th:field="*{url}"/></p>
+            <p><input id="next-button" name = "next-button" type="button" value ="next"/> <input id="save-button" name = "save-button" type="button" value ="save"/> </p>
+        </form>
+        <p id ="result"></p>
+        <script type="text/javascript" src="webjars/jquery/2.2.4/jquery.min.js"></script>
+        <script type="text/javascript" src="js/nextcactus.js"></script>
+        <script type="text/javascript" src="js/savecactus.js"></script>
+        <script type="text/javascript" src="js/selectcactus.js"></script>
+    </body>
+</html>
