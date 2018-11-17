@@ -59,19 +59,43 @@ public class ImageService {
         return cactusMap.getOrDefault(cactusType, new ArrayList<CactusDto>());
     }
 
-    public String saveCactus(CactusDto cactusdto) {
+    public Cactus toCactus(CactusDto cactusdto) {
         try {
-            List<Cactus> list = cactusDao.getByName(cactusdto.getCactusname());
-            if (!list.isEmpty()) {
-                return "already exists";
-            }
             File file = new File("src/main/resources/static/".concat(cactusdto.getUrl()));
             BufferedImage image = ImageIO.read(file);
             Cactus cactus = new Cactus(cactusdto.getCactusname(), cactusdto.getUrl(), image);
+            return cactus;
+        } catch (IOException ex) {
+            return null;
+        }
+    }
+
+    public String saveCactus(Cactus cactus) {
+        try {
+            List<Cactus> list = cactusDao.getByName(cactus.getCactusname());
+            if (!list.isEmpty()) {
+                return "already exists";
+            }
             long id = cactusDao.insert(cactus);
             return "saved";
         } catch (Exception e) {
             return e.getMessage();
         }
     }
+
+    public boolean isImage(CactusDto cactusdto) {
+        if (cactusdto.getUrl().endsWith(".jpg")) {
+            return true;
+        }
+        return false;
+    }
+
+    public String fromNull(String input) {
+        if (input == null) {
+            return "objec has not been found";
+        } else {
+            return input;
+        }
+    }
+
 }

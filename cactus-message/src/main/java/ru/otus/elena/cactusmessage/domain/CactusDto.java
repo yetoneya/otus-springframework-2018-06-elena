@@ -1,10 +1,17 @@
 package ru.otus.elena.cactusmessage.domain;
 
+import java.awt.image.BufferedImage;
+import java.io.File;
+import java.io.IOException;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Objects;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import javax.imageio.ImageIO;
 
 public class CactusDto {
+
     long id;
     public String cactusname;
     public String url;
@@ -21,10 +28,6 @@ public class CactusDto {
         this.id = id;
         this.cactusname = cactusname;
         this.url = url;
-    }
-
-    public CactusDto toCactusDto(String name) {
-        return new CactusDto(name, name.concat(".jpg"));
     }
 
     public long getId() {
