@@ -1,0 +1,16 @@
+## YAML Template.
+---
+management:
+   endpoints:
+      web:
+         exposure:
+            include: "*"
+health:
+   indicator: 
+      enabled: true 
+spring:
+   data:      
+      mongodb.host: localhost
+      mongodb.port: 0
+      mongodb.uri: mongodb://localhost/test
+      

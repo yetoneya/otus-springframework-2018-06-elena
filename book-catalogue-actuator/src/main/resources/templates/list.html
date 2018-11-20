@@ -1,0 +1,224 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+    <head>
+        <title>Book list</title>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <style type="text/css">
+
+            body {
+                padding: 10px;
+                background: #367c63;
+                border-color: #03271d;                 
+            }
+            label {
+                padding-left: 5px;
+                background:  #eed58e;
+                border: 2px solid #bbc8d0;
+                border-radius: 5px;
+                display: inline-block;
+                width: 100px;
+            }
+            td{
+                vertical-align: top;
+                padding-left: 34px;
+            }
+            input{
+                padding-left: 5px;
+                background:  #bfccc6;
+                margin-left: 5px;
+                border-radius: 5px;
+            }
+
+            input:read-only {
+                background: #cfd4de;
+            }
+            .find{
+                width: 300px; 
+                border-radius: 5px;
+            }
+            .edit{
+                border-radius: 5px;
+                width: 352px;
+            }
+            .row{
+                margin-top: 10px;
+                margin-left: 5px;              
+            }
+
+            .submit{
+                background: #0b8eb4; 
+                text-align: center;
+                width: 45px;
+                border: 2px solid #bbc8d0;
+                border-radius: 5px;
+                min-width: 50px;
+            }
+            #selection{
+                margin-top: 12px;
+            }
+            select{
+                background:  #bfccc6;
+                min-width: 600px;
+                border: 3px solid #bbc8d0;
+                border-radius: 5px;
+
+            }
+            textarea{
+                background:  #bfccc6;
+                border: 3px solid #bbc8d0;
+                min-height: 170px;
+                min-width: 596px;
+                resize: none;
+                overflow-y: scroll;
+                line-break: auto;
+                border-radius: 5px;
+            }
+            ::-webkit-scrollbar{
+                background-color:#b2c1bd
+            }
+            #savecomment{
+                margin-top: 5px;
+            }
+            #logout{
+                margin-left: 36px;
+            }
+            #check{
+                background:  #bfccc6; 
+            }
+
+        </style>
+    </head>
+    <body>
+        <a id ="logout" th:href="@{/logout}" href="login.html">Log out</a>  <a id ="foradult" th:href="@{/foradult}" href="login.html">All books</a>  <a th:if="${admin}" th:href="@{/admin}" href="admin.html">Admin</a>
+        <table>
+            <tr>
+                <td>
+                    <div>
+                        <h3>Books:</h3>                     
+                        <form  id="all-books" action="list.html">
+                            <select id="book-list" name="book-list" size="10">                      
+                                <option th:each="book : ${books}"
+                                        th:value="${book.id}"
+                                        th:text="${book.name}+', '+${book.genre}+', '+${book.authors}">book parameters</option>              
+                            </select> 
+                            <br>                      
+                            <p><input th:if="${admin}" id="edit-button" class="submit" type="submit" value ="edit" disabled="disabled"/> <input th:if="${admin}" id="delete-button" class="submit" type="button" value ="delete" disabled="disabled"/></p>
+                        </form>                               
+                    </div>
+                </td>
+                <td>
+                    <div>
+                        <h3>Edit:</h3>
+                        <form id="edit-form" action="list.html"> 
+                            <div class="row">                            
+                                <input  id="edit-id" type="hidden"/>
+                            </div>
+                            <div class="row">
+                                <label for="edit-name"> Name:</label>
+                                <input class="edit" id="edit-name" type="text" value="book"/>
+                            </div>
+                            <br>
+                            <div class="row">
+                                <label for="edit-genre"> Genre:</label>
+                                <input class="edit" id="edit-genre" type="text" value="genre"/>
+                            </div>
+                            <br>
+                            <div class="row">
+                                <label for="edit-authors"> Authors:</label>
+                                <input class="edit" id="edit-authors" type="text"  value="authors"/>
+                            </div>
+                            <br>
+
+                            <p><input class="submit" id="edit-input" type="submit" value="save" disabled="disabled"/></p>
+                        </form>
+                    </div>   
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <div>
+                        <h3>Comments:</h3>
+                        <textarea id="all-comments" readonly="readonly"> 
+                        </textarea>  
+                    </div>
+                </td>
+                <td>
+                    <div>
+                        <h3>Find:</h3>
+                        <form class="row" id="name-form" action="list.html">
+                            <label for="find-by-name">Find by name: </label>
+                            <input class="find" id="find-by-name" type="text"/> <input class="submit" type="submit" value="send"/>
+                        </form>
+                        <br>
+                        <form class="row" id="genre-form" action="list.html">
+                            <label for="find-by-genre">Find by genre: </label>
+                            <input class="find" id="find-by-genre" type="text"/> <input class="submit" type="submit" value="send"/>
+                        </form>
+                        <br>
+                        <form class="row" id="authors-form">
+                            <label for="find-by-authors">Find by author:</label>
+                            <input id="find-by-authors" class="find" type="text"/> <input class="submit" type="submit" value="send"/>
+                        </form>
+                        <br>
+                        <form class="row" id="find-all-form" action="list.html">
+                            <label for="all">Find all: &nbsp; </label>
+                            <input id="all" class="submit" type="submit" value="send"/>
+                        </form>
+                    </div>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <div>
+                        <h3>Your comment:</h3>
+                        <form id="comment-form">
+                            <div>
+                                <textarea id="comment-text"></textarea>
+                            </div>
+                            <p><input class="submit" id="savecomment" type="submit" value="save"/></p>
+                        </form>
+                    </div>
+                </td>
+                <td>
+                    <div>
+                        <h3>Add book:</h3>      
+                        <form id="add-form">                
+                            <div class="row">
+                                <label for="name">Name:</label>
+                                <input id="name" class="edit" type="text" value="book"/>
+                            </div>
+                            <br>
+                            <div class="row">
+                                <label for="genre">Genre:</label>
+                                <input id="genre" class="edit" type="text" value="genre"/>
+                            </div>
+                            <br>
+                            <div class="row"> 
+                                <label for="authors">Authors:</label>
+                                <input id="authors" class="edit" type="text" value="authors"/>
+                            </div>
+                            <br> 
+                            <div class="row">                               
+                                <input id="adult" name="adult" type="checkbox" checked="checked"/> For adult
+                            </div>
+                            <br> 
+                            <p><input th:if="${admin}" class="submit" type="submit" value="save"/></p>                         
+                        </form> 
+                    </div>
+                </td>
+            </tr>
+        </table>
+        <script type="text/javascript" src="webjars/jquery/2.2.4/jquery.min.js"></script>
+        <script type="text/javascript" src="save.js"></script>
+        <script type="text/javascript" src="delete.js"></script>
+        <script type="text/javascript" src="genre.js"></script>
+        <script type="text/javascript" src="name.js"></script>
+        <script type="text/javascript" src="authors.js"></script>
+        <script type="text/javascript" src="edit.js"></script>
+        <script type="text/javascript" src="booktoedit.js"></script> 
+        <script type="text/javascript" src="findall.js"></script>
+        <script type="text/javascript" src="bookselect.js"></script>
+        <script type="text/javascript" src="addcomment.js"></script>
+    </body>
+</html>

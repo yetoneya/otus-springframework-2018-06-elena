@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+    <head>
+        <title>Book list</title>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <style type="text/css">
+
+            body {
+                padding: 20px;
+                background: #367c63;
+                border-color: #03271d;                 
+            }
+            label {
+                padding-left: 5px;
+                background:  #eed58e;
+                border: 2px solid #bbc8d0;
+                border-radius: 5px;
+                display: inline-block;
+                width: 100px;
+            }
+
+            input{
+                padding-left: 5px;
+                background:  #bfccc6;
+                margin-left: 5px;
+                border-radius: 5px;
+            }
+            .row{
+                margin-top: 10px;
+                margin-left: 5px;              
+            }
+
+            .submit{
+                background: #0b8eb4; 
+                text-align: center;
+                width: 45px;
+                border: 2px solid #bbc8d0;
+                border-radius: 5px;
+                min-width: 50px;
+            }
+            #selection{
+                margin-top: 12px;
+            }
+            select{
+                background:  #bfccc6;
+                min-width: 600px;
+                border: 3px solid #bbc8d0;
+                border-radius: 5px;
+
+            }
+            ::-webkit-scrollbar{
+                background-color:#b2c1bd
+            }
+
+        </style>
+    </head>
+    <body>
+        <a id ="logout" th:href="@{/logout}" href="login.html">Log out</a> <a id ="books" th:href="@{/books}" href="login.html">Books</a> 
+        <div>
+            <h3>Users:</h3>                     
+            <form  id="all-users">
+                <select id="user-list" name="user-list" size="10">                      
+                    <option th:each="user : ${userlist}"
+                            th:value="${user.id}"
+                            th:text="${user.username}+', '+${user.birthday}">username</option>              
+                </select> 
+                <br>                      
+                <p><input id="user-button" name="user-button" class="submit" type="button" value ="delete" disabled="disabled"/> <input id="refresh" name="refresh" class="submit" type="button" value ="refresh" disabled="disabled"/></p>
+            </form>
+            <br>
+            <label for="login">Login counter:</label>
+            <p id="login" th:text="${login}">0</p>
+            <label for="signup">Signup counter:</label>
+            <p id="signup" th:text="${signup}">0</p>
+            <label for="warn">Loggers. ERROR counter:</label>
+            <p id="warn" th:text="${error}">0</p>
+            <label for="warn">Loggers. WARN counter:</label>
+            <p id="error" th:text="${warn}">0</p>
+            <label for="warn">Timer. Find all, ms:</label>
+            <p id="error" th:text="${timer}">0</p>
+        </div>
+        <script type="text/javascript" src="webjars/jquery/2.2.4/jquery.min.js"></script>
+        <script type="text/javascript" src="userdelete.js"></script>
+        <script type="text/javascript" src="userselect.js"></script>
+        <script type="text/javascript" src="refresh.js"></script>
+    </body>
+</html>
