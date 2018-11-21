@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+    <head>
+        <title>List of all books</title>
+        <style type="text/css">
+            body {
+                padding: 50px;
+            }
+            .books, .books td {
+                border: 1px solid lightgray;
+                padding: 5px;
+            }
+            .tr{
+                padding-bottom: 10px;
+                padding-top: 10px;
+            }
+        </style>
+    </head>
+    <body>
+        <h2>Books:</h2>
+        <table class="books">
+            <thead>
+                <tr class="tr">
+                    <th>id</th>
+                    <th>name</th>
+                    <th>genre</th>
+                    <th>authors</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr th:each="book : ${books}">
+                    <td th:text="${book.id}">1</td>
+                    <td th:text="${book.name}">Book</td>
+                    <td th:text="${book.genre}">Genre</td>
+                    <td th:text="${book.authors}">Author</td>
+                    <td>
+                        <a th:href="@{/edit(id=${book.id})}" href="edit.html">Edit</a>
+                    </td>
+                    <td>
+                        <a th:href="@{/comment(id=${book.id})}" href="comment.html">Add comment</a>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+        <br>
+        <a th:href="@{/edit(id=0)}" href="edit.html">Add book</a>  <a th:href="@{/name}" href="name.html">Find by name</a>  <a th:href="@{/genre}" href="genre.html">Find by genre</a> <a th:href="@{/}" href="list.html">All</a> 
+    </body>
+</html>
