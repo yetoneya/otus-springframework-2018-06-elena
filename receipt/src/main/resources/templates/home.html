@@ -1,0 +1,24 @@
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+    <head>
+        <title>Receipt</title>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">        
+             <style type="text/css">
+                        body {
+                padding: 50px;
+                background: #367c63;
+                border-color: #03271d; 
+            }
+            .row {
+                margin-top: 10px;
+                margin-left: 5px;
+            }
+        </style>
+    </head>
+    <body>
+        <ul class="row">         
+            <li><a th:href="@{/login}" href="login.html"><h3>sign in</h3></a></li>          
+            <li><a th:href="@{/signup}" href="login.html"><h3>sign up</h3></a></li>
+        </ul>
+    </body>
+</html>

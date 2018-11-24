@@ -1,0 +1,172 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+    <head>
+        <title>Receipt</title>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <style type="text/css">
+
+            body {
+                padding: 10px;
+                background: #367c63;
+                border-color: #03271d;                 
+            }
+            label {
+                padding-left: 5px;
+                background:  #eed58e;
+                border: 2px solid #bbc8d0;
+                border-radius: 5px;
+                display: inline-block;
+                width: 110px;
+            }
+            td{
+                vertical-align: top;
+                padding-left: 34px;
+            }
+            input{
+                padding-left: 5px;
+                background:  #bfccc6;
+                margin-left: 5px;
+                border-radius: 5px;
+            }
+
+            input:read-only {
+                background: #cfd4de;
+            }
+            .find{
+                width: 300px; 
+                border-radius: 5px;
+            }
+            .edit{
+                border-radius: 5px;
+                width: 352px;
+            }
+            .row{
+                margin-top: 10px;
+                margin-left: 5px;              
+            }
+
+            .submit{
+                background: #0b8eb4; 
+                text-align: center;
+                width: 45px;
+                border: 2px solid #bbc8d0;
+                border-radius: 5px;
+                min-width: 50px;
+            }
+            select{
+                background:  #bfccc6;
+                min-width: 500px;
+                border: 3px solid #bbc8d0;
+                border-radius: 5px;
+
+            }
+            textarea{
+                background:  #bfccc6;
+                border: 3px solid #bbc8d0;
+                min-height: 740px;
+                min-width: 600px;
+                width: 100%;
+                resize: none;
+                overflow-y: scroll;
+                line-break: auto;
+                border-radius: 5px;
+            }
+            ::-webkit-scrollbar{
+                background-color:#b2c1bd
+            }
+
+            #logout{
+                margin-left: 36px;
+            }
+        </style>
+    </head>
+    <body>
+        <a id ="logout" th:href="@{/logout}" href="login.html">Log out</a>  <a id ="manual" th:href="@{/manual}" href="manual.html">Instruction manual</a>  <a th:if="${admin}" th:href="@{/admin}" href="admin.html">Admin</a>       
+        <table>
+            <tr>
+                <td rowspan="3">
+                    <div>
+                        <h3>Receipt:</h3>
+                        <textarea id="receipt-area"> 
+                        </textarea>  
+                    </div>
+                </td>
+                <td>
+                    <div>
+                        <h3>Find receipt:</h3>
+                        <form id="find-form">                
+                            <div class="row">
+                                <label for="find-type">By type:</label>
+                                <input id="find-type" class="edit" type="text" value="салат"/>
+                            </div>
+                            <br>
+                            <div class="row">
+                                <label for="find-name">By name:</label>
+                                <input id="find-name" class="edit" type="text" value=""/>
+                            </div>
+                            <br>
+                            <div class="row"> 
+                                <label for="find-component">By component:</label>
+                                <input id="find-component" class="edit" type="text" value=""/>
+                            </div>
+                            <br> 
+                            <br> 
+                            <input id ="find-input" class="submit" type="submit" value="find"/>                         
+                        </form> 
+                    </div>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <div>       
+                        <h3>Select:</h3>                     
+                        <select id="receipt-list" name="reseipt-list" size="10">                      
+                            <option th:each="receipt : ${receipts}"
+                                    th:value="${receipt.id}"
+                                    th:text="${receipt.type}+', '+${receipt.name}+', '+${receipt.components}"></option>              
+                        </select>
+                    </div>
+                    <br>
+                    <br> 
+                    <div>
+                        <input th:if="${admin}" id="delete-button" name="delete-button" class="submit" type="button" value ="delete" disabled="disabled"/>
+                    </div> 
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <div>
+                        <h3>Add receipt:</h3>
+                        <form id="save-form">                
+                            <div class="row">
+                                <label for="save-type">Type:</label>
+                                <input id="save-type" class="edit" type="text" value="салат"/>
+                            </div>
+                            <br>
+                            <div class="row">
+                                <label for="save-name">Name:</label>
+                                <input id="save-name" class="edit" type="text" value=""/>
+                            </div>
+                            <br>
+                            <div class="row"> 
+                                <label for="save-component">Components:</label>
+                                <input id="save-component" class="edit" type="text" value=""/>
+                            </div>
+                            <br>
+                            <br> 
+                            <input id="save-input" class="submit" type="submit" value="save" disabled="disabled"/>                         
+                        </form>
+                        <p id ="result"></p>
+                    </div>  
+                </td>
+            </tr>
+        </table>       
+        <script type="text/javascript" src="webjars/jquery/2.2.4/jquery.min.js"></script>
+        <script type="text/javascript" src="receiptfind.js"></script>
+        <script type="text/javascript" src="receiptselect.js"></script>
+        <script type="text/javascript" src="receiptdelete.js"></script>
+        <script type="text/javascript" src="receiptsave.js"></script>
+        <script type="text/javascript" src="saveenable.js"></script>
+    </body>
+</html>
