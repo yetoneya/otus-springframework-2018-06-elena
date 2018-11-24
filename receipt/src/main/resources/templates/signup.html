@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+    <head>
+        <title>Sign up</title>
+        <style type="text/css">
+            body {
+                padding: 50px;
+                background: #367c63;
+                border-color: #03271d; 
+            }
+            label {
+                display: inline-block;
+                width: 150px;
+            }
+            .row {
+                margin-top: 10px;
+                margin-left: 5px;
+            }
+
+            .submit{
+                text-align: center;
+                width: 60px;
+                border: 3px solid #bbc8d0;
+
+            }
+        </style>
+    </head>
+    <body> 
+        <h3 th:text="${label}">Sign up:</h3> 
+        <br>
+        <form th:action="@{/check}" th:method="post">           
+            <div class="row">
+                <label for="username">username:</label>
+                <input id="username" type="text" name="username" value=""/>
+            </div>
+            <br>
+            <div class="row">
+                <label for="password">password:</label>
+                <input id="password" type="password" name="password" value=""/>
+            </div>
+            <br>
+            <div class="row">
+                <label for="repeatpassword"> repeat password:</label>
+                <input id="repeatpassword" type="password" name="repeatpassword" value=""/>
+            </div>
+            <br><br>
+            <input class="submit" type="submit" value="submit"/>
+        </form>
+    </body>
+</html>
