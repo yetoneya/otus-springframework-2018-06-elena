@@ -101,8 +101,7 @@ public class AdminController {
             return "admin";
         } catch (Exception e) {
             logger.error("exception in userList");
-
-            model.addAttribute("userlist", new ArrayList<User>());
+            model.addAttribute("userlist", new ArrayList<>());
             return "admin";
         }
     }

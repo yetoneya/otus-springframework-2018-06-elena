@@ -12,11 +12,9 @@ import org.springframework.boot.context.properties.ConfigurationProperties;
 import org.springframework.data.mongodb.repository.config.EnableMongoRepositories;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import ru.otus.elena.receipt.dao.RoleRepository;
-import ru.otus.elena.receipt.dao.UserRepository;
 import ru.otus.elena.receipt.domain.Role;
 import ru.otus.elena.receipt.domain.User;
 import ru.otus.elena.receipt.service.UserService;
-import ru.otus.elena.receipt.dao.ReceiptRepository;
 
 @ConfigurationProperties("application")
 @SpringBootApplication
@@ -26,11 +24,7 @@ public class Main {
 
     Logger logger = LoggerFactory.getLogger(Main.class);
     @Autowired
-    private ReceiptRepository receiptRepository;
-    @Autowired
     private UserService userService;
-    @Autowired
-    private UserRepository userRepository;
     @Autowired
     private RoleRepository roleRepository;
 

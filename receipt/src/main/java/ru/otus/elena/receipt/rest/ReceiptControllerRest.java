@@ -28,7 +28,7 @@ public class ReceiptControllerRest {
     @Autowired
     private ReceiptService receiptService;
 
-    @RequestMapping("receipt/save")
+    @RequestMapping("/receipt/save")
     public ResponseEntity<List<String>> saveReceipt(
             @RequestParam(value = "type") String type,
             @RequestParam(value = "name") String name,
@@ -63,8 +63,8 @@ public class ReceiptControllerRest {
         }
     }
 
-    @RequestMapping("receipt/select")
-    public ResponseEntity<Receipt> selectById(@RequestParam(value = "id") String id) {
+    @RequestMapping("/receipt/select")
+    public ResponseEntity<Receipt> select(@RequestParam(value = "id") String id) {
         try {
             Receipt receipt = receiptRepository.findById(id).orElseThrow(NotFoundException::new);
             logger.info("findById was successful");
@@ -75,7 +75,7 @@ public class ReceiptControllerRest {
         }
     }
 
-    @RequestMapping("receipt/delete")
+    @RequestMapping("/receipt/delete")
     public ResponseEntity<List<String>> delete(@RequestParam(value = "id") String id) {
         try {
             receiptRepository.deleteById(id);
@@ -95,8 +95,8 @@ public class ReceiptControllerRest {
         }
     }
 
-    @RequestMapping("receipt/find")
-    public ResponseEntity<List<Receipt>> findReceiptBy(@RequestParam(value = "type") String type,
+    @RequestMapping("/receipt/find")
+    public ResponseEntity<List<Receipt>> findReceipt(@RequestParam(value = "type") String type,
             @RequestParam(value = "name") String name, @RequestParam(value = "component") String component) {
         try {
             Map<String, String> map = new HashMap<>();
