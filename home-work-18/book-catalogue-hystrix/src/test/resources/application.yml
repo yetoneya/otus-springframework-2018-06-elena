@@ -1,5 +1,6 @@
 ## YAML Template.
 ---
+
 health:
    indicator: 
       enabled: true 
