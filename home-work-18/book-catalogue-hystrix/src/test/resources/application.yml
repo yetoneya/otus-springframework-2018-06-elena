@@ -1,6 +1,10 @@
 ## YAML Template.
 ---
-
+management:
+   endpoints:
+      web:
+         exposure:
+            include: "*"
 health:
    indicator: 
       enabled: true 

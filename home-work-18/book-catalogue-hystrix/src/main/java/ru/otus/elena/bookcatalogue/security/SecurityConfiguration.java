@@ -32,7 +32,7 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
                 .antMatchers("/").permitAll()
                 .antMatchers("/signup").permitAll()
                 .antMatchers("/books").authenticated()
-                .antMatchers("/admin").hasAuthority("ROLE_ADMIN")
+                .antMatchers("/userlist").hasAuthority("ROLE_ADMIN")
                 .and()
                 .formLogin()
                 .loginPage("/login").failureUrl("/login?error=error")

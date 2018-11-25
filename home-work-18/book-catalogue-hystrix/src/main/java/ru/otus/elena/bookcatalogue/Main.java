@@ -56,7 +56,9 @@ public class Main {
     @SuppressWarnings("SpringJavaAutowiredFieldsWarningInspection")
     @PostConstruct
     public void init() {
-
+        roleRepository.deleteAll();
+        userRepository.deleteAll();
+        bookRepository.deleteAll();
         try {
             Role adminRole = roleRepository.findByRole("ROLE_ADMIN");
             if (adminRole == null) {
