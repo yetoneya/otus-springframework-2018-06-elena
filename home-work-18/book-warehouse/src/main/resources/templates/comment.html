@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html  lang="en" xmlns:th="http://www.thymeleaf.org">
+    <head>
+        <title>Add comment</title>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <style type="text/css">
+    body {
+        padding: 50px;
+    }
+    label {
+        display: inline-block;
+        width: 100px;
+    }
+    .row {
+        margin-top: 10px;
+    }
+    .submit{
+        text-align: center;
+        width: 45px;
+        border: 3px solid #bbc8d0;
+        background-color: blanchedalmond;     
+        
+    }
+        </style>
+    </head>
+    <body>
+        <h3>Your comment:</h3>
+        <form id="edit-form"  th:object="${book}" th:action="@{/save}" th:method="post" action="list.html">
+            <th:block th:text="${book.addComment('...your comment...')}"/>
+            <div class="row">
+                <input id="id-input" type="hidden" th:field="*{id}" value="1"/>
+            </div>
+            <div class="row">
+                <input id="name-input" type="hidden" th:field="*{name}" value="book"/>
+            </div>
+            <div class="row">
+                <input id="genre-input" type="hidden" th:field="*{genre}" value="genre"/>
+            </div>
+            <div class="row">
+                <input id="authors-input" type="hidden" th:field="*{authors}" value="authors"/>
+            </div>
+            <div  class="row">
+                <table>              
+                    <tr th:each="comment, stat : *{comments}">                   
+                        <td><input type="text" th:field="*{comments[__${stat.index}__]}" size="100"/></td>       
+                    </tr>                 
+                </table>
+            </div>
+            <br>
+            <div class="submit">
+                <input type="submit" value="save"/>
+            </div>
+        </form>
+    </body>
+</html>
