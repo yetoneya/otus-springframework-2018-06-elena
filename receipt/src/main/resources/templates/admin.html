@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+    <head>
+        <title>Admin</title>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <style type="text/css">
+
+            body {
+                padding: 20px;
+                background: #367c63;
+                border-color: #03271d;                 
+            }
+            label {
+                padding-left: 5px;
+                background:  #eed58e;
+                border: 2px solid #bbc8d0;
+                border-radius: 5px;
+                display: inline-block;
+                width: 175px;
+            }
+
+            input{
+                padding-left: 5px;
+                background:  #bfccc6;
+                margin-left: 5px;
+                border-radius: 5px;
+            }
+            .row{
+                margin-top: 10px;
+                margin-left: 25px;              
+            }
+
+            .submit{
+                background: #0b8eb4; 
+                text-align: center;
+                border: 2px solid #bbc8d0;
+                border-radius: 5px;              
+                width: 100px;
+            }
+
+            select{
+                background:  #bfccc6;
+                min-width: 600px;
+                border: 3px solid #bbc8d0;
+                border-radius: 5px;
+
+            }
+
+            td{
+                vertical-align: top;
+                padding-left: 20px;
+            }
+
+            ::-webkit-scrollbar{
+                background-color:#b2c1bd
+            }
+
+        </style>
+    </head>
+    <body>
+        <a id ="logout" th:href="@{/logout}" th:text="#{logout}" href="login.html">Log out</a> <a id ="receipt" th:href="@{/receipt}" th:text="#{receipt}" href="login.html">Receipt</a> 
+        <div class="row">
+            <h3 th:text="#{admin.users}">Users:</h3>                     
+            <form  id="all-users">
+                <select id="user-list" name="user-list" size="10">                      
+                    <option th:each="user : ${userlist}"
+                            th:value="${user.id}"
+                            th:text="${user.username}"></option>              
+                </select> 
+                <br>                      
+                <p><input id="user-button" class="submit" type="button" th:value="#{delete}" value ="delete" disabled="disabled"/></p>
+            </form>
+        </div>
+        <br> <br> 
+        <table>
+            <tr>
+                <td>
+                    <label for="login" th:text="#{admin.login.counter}">Login counter:</label>
+                    <p id="login" th:text="${login}">0</p>
+                </td>
+                <td>
+                    <label for="signup" th:text="#{admin.signup.counter}" >Signup counter:</label>
+                    <p id="signup" th:text="${signup}">0</p>
+                </td>
+                <td>
+                    <label for="warn" th:text="#{admin.error.counter}">Loggers. ERROR counter:</label>
+                    <p id="warn" th:text="${error}">0</p>
+                </td>
+                <td>
+                    <label for="warn" th:text="#{admin.warn.counter}">Loggers. WARN counter:</label>
+                    <p id="error" th:text="${warn}">0</p>
+                </td>
+                <td>
+                    <label for="warn" th:text="#{admin.timer}">Timer. Find all, ms:</label>
+                    <p id="error" th:text="${timer}">0</p>
+                </td>
+            </tr>
+        </table>
+        <script type="text/javascript" src="webjars/jquery/2.2.4/jquery.min.js"></script>
+        <script type="text/javascript" src="js/userdelete.js"></script>
+        <script type="text/javascript" src="js/userselect.js"></script>
+    </body>
+</html>
