@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+    <head>
+        <title>Instruction manual</title>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <style type="text/css">
+
+            body {
+                padding: 20px;
+                background: #367c63;
+                border-color: #03271d;                 
+            }
+            label {
+                padding-left: 5px;
+                background:  #eed58e;
+                border: 2px solid #bbc8d0;
+                border-radius: 5px;
+                display: inline-block;
+                width: 100px;
+            }
+
+            input{
+                padding-left: 5px;
+                background:  #bfccc6;
+                margin-left: 5px;
+                border-radius: 5px;
+            }
+            .row{
+                margin-top: 10px;
+                margin-left: 5px;              
+            }
+
+            .submit{
+                background: #0b8eb4; 
+                text-align: center;
+                width: 45px;
+                border: 2px solid #bbc8d0;
+                border-radius: 5px;
+                min-width: 50px;
+            }
+
+            select{
+                background:  #bfccc6;
+                min-width: 600px;
+                border: 3px solid #bbc8d0;
+                border-radius: 5px;
+
+            }
+            ::-webkit-scrollbar{
+                background-color:#b2c1bd
+            }
+
+        </style>
+    </head>
+    <body>
+        <a th:href="@{/logout}" th:text="#{logout}" href="login.html">Log out</a> <a th:href="@{/receipt}" th:text="#{/receipt}" href="rlist.html">Receipt</a> 
+        <br>
+        <br>
+        <h1>Инструкция по использованию:</h1>
+        <div>
+            <h3>Добавление рецепта:</h3>
+            <ul>
+                <li>Добавить текст рецепта в поле "Receipt"</li>                 
+                <li>Заполнить поля поля "Type", "Name", "Component" произвольным, понятным для Вас образом</li>
+                <li>Например: "салат", "оливье", "огурец,яйцо"</li>
+                <li>Эти поля предназначены для последующего поиска сохраненного текста</li> 
+                <li>В поле "Component" не обязательно писать все компоненты, например, салата, а только те, которые Вы хотите использовать при последующем поиске</li>
+                <li>Поле "Picture, URL" не обязательное, в него по желанию можно добавить URL подходящей картинки, скопировав его, к примеру, в интернете</li>
+                <li>При просмотре соответствующего рецепта будет показыватся также и эта картинка</li>
+                <li>Нажать кнопку "Save"</li>
+            </ul> 
+            <h3>Поиск рецепта:</h3>
+            <ul>
+                <li>При нажатии кнопки "Find" в поле "Select" выводится список текстов, сохраненные параметры которых "Type", "Name", "Component" соответствуют введенным в поля "Type", "Name" "Component" словам</li>
+                <li>При щелчке мыши на выбранной строке из "Select" в поле "Receipt" выведется соответствующий сохраненный текст</li> 
+                <li>Если оставить пустыми все поля "By type", "By name", "By component", то в список "Select" выведутся данные по всем сохраненным текстам</li> 
+                <li>Если заполнить одно поле, то поиск будет производиться только по этому полю, если два - то по двум, если три - то по трем </li>
+                <li>Например, если в поле "Component" ввести слово "огурец", то получите список текстов, при сохранении которых в поле "Component" был указан огурец</li> 
+                <li>В любое поле можно вводить только часть слова, а не все</li>
+                <li>Даже одну букву, но тогда выберется все, где есть эта буква. Например, если ввести "о", то получится поиск и по слову "Огурец", и по слову "помидОр", а также по другим, где есть эта буква</li>
+            </ul>
+            <h3>Удаление рецепта:</h3>
+            <ul>
+                <li>Выбрать строку в списке "Select"</li>
+                <li>Нажать кнопку "Delete" под списком</li>
+            </ul>
+        </div>
+    </body>
+</html>
