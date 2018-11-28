@@ -1,68 +1,44 @@
 package ru.otus.elena.receipt.domain;
 
-import java.io.Serializable;
 import java.util.Objects;
-import org.springframework.data.annotation.Id;
-import org.springframework.data.mongodb.core.mapping.Document;
 
-@Document(collection = "receipt")
-public class Receipt implements Serializable {
+public class ReceiptDto {
 
-    @Id
     private String id;
     private String type;
     private String name;
     private String component;
     private String description;
-    private String url="";
-   
+    private String url;
+    private String message="";
 
-    public Receipt() {
+    public ReceiptDto() {
     }
 
-    public Receipt(String type, String name, String component, String description, String url) {
-        this.type = type;
-        this.name = name;
-        this.component = component;
-        this.description = description;
-        this.url = url;
-    }
-
-    public Receipt(String id, String type, String name, String component, String description, String url) {
+    public ReceiptDto(String id, String type, String name, String component, String description, String url) {
         this.id = id;
         this.type = type;
         this.name = name;
         this.component = component;
         this.description = description;
-        this.url = url;
+        this.url = url;       
+    }
+
+    public static ReceiptDto toReceiptDto(Receipt receipt) {
+
+        return new ReceiptDto(receipt.getId(), receipt.getType(), receipt.getName(), receipt.getComponent(), receipt.getDescription(), receipt.getUrl());
     }
 
     public String getId() {
         return id;
     }
 
-    public void setId(String id) {
-        this.id = id;
-    }
-
     public String getType() {
         return type;
     }
 
-    public void setType(String type) {
-        this.type = type;
-    }
-
     public String getName() {
         return name;
-    }
-
-    public void setName(String name) {
-        this.name = name;
-    }
-
-    public void setComponent(String components) {
-        this.component = components;
     }
 
     public String getComponent() {
@@ -73,16 +49,20 @@ public class Receipt implements Serializable {
         return description;
     }
 
-    public void setDescription(String description) {
-        this.description = description;
-    }
-
     public String getUrl() {
         return url;
     }
 
+    public String getMessage() {
+        return message;
+    }
+
     public void setUrl(String url) {
         this.url = url;
+    }
+
+    public void setMessage(String message) {
+        this.message = message;
     }
 
     @Override

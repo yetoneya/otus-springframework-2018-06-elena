@@ -24,7 +24,7 @@ import ru.otus.elena.receipt.dao.RoleRepository;
 import ru.otus.elena.receipt.dao.UserRepository;
 import ru.otus.elena.receipt.domain.Role;
 import ru.otus.elena.receipt.domain.User;
-import ru.otus.elena.receipt.service.UserService;
+
 
 @RunWith(SpringRunner.class)
 @SpringBootTest

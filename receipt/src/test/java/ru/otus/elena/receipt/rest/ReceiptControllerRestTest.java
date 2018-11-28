@@ -15,6 +15,7 @@ import org.springframework.test.annotation.DirtiesContext;
 import static org.springframework.test.annotation.DirtiesContext.ClassMode.BEFORE_EACH_TEST_METHOD;
 import org.springframework.test.context.junit4.SpringRunner;
 import org.springframework.test.web.servlet.MockMvc;
+import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.content;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
@@ -45,7 +46,10 @@ public class ReceiptControllerRestTest {
     @WithMockUser(username = "admin")
     public void saveReceiptTest() throws Exception {
         MediaType type = new MediaType("application", "json", java.nio.charset.Charset.forName("UTF-8"));
-        this.mvc.perform(get("/receipt/save/?type=receipt&name=receipt&component=receipt&description=receipt"))
+        Receipt receipt = new Receipt("receipt", "receipt", "receipt", "receipt", "receipt");
+        this.mvc.perform(MockMvcRequestBuilders.post("/receipt/save")
+                .contentType(MediaType.APPLICATION_JSON)
+                .content(objectMapper.writeValueAsString(receipt)))
                 .andExpect(status().isOk())
                 .andExpect(content().contentType(type));
     }
@@ -53,7 +57,7 @@ public class ReceiptControllerRestTest {
     @Test
     @WithMockUser(username = "admin")
     public void deleteTest() throws Exception {
-        Receipt receipt = new Receipt("receipt", "receipt", "receipt", "receipt");
+        Receipt receipt = new Receipt("receipt", "receipt", "receipt", "receipt", "receipt");
         receiptRepository.save(receipt);
         MediaType type = new MediaType("application", "json", java.nio.charset.Charset.forName("UTF-8"));
         this.mvc.perform(get("/receipt/delete").param("id", receipt.getId()))
@@ -64,7 +68,7 @@ public class ReceiptControllerRestTest {
     @Test
     @WithMockUser(username = "admin")
     public void selectTest() throws Exception {
-        Receipt receipt = new Receipt("receipt", "receipt", "receipt", "receipt");
+        Receipt receipt = new Receipt("receipt", "receipt", "receipt", "receipt", "receipt");
         receiptRepository.save(receipt);
         MediaType type = new MediaType("application", "json", java.nio.charset.Charset.forName("UTF-8"));
         this.mvc.perform(get("/receipt/select").param("id", receipt.getId())).andExpect(status().isOk())
@@ -74,7 +78,7 @@ public class ReceiptControllerRestTest {
     @Test
     @WithMockUser(username = "admin")
     public void findReceiptTest() throws Exception {
-        Receipt receipt = new Receipt("receipt", "receipt", "receipt", "receipt");
+        Receipt receipt = new Receipt("receipt", "receipt", "receipt", "receipt", "receipt");
         receiptRepository.save(receipt);
         MediaType type = new MediaType("application", "json", java.nio.charset.Charset.forName("UTF-8"));
         this.mvc.perform(get("/receipt/find/?type=receipt&name=receipt&component=receipt")).andExpect(status().isOk())

@@ -21,20 +21,19 @@ import ru.otus.elena.receipt.domain.Receipt;
 @DirtiesContext(classMode = BEFORE_EACH_TEST_METHOD)
 public class ReceiptRepositoryTest {
 
-   @Autowired
+    @Autowired
     private ReceiptRepository receiptRepository;
 
     @Before
     public void setUp() {
         receiptRepository.deleteAll();
     }
-    
 
     @Test
     @WithMockUser(username = "vasya")
     public void testFindByType() {
         System.out.println("testFindByType");
-        Receipt receipt = new Receipt("receipt", "receipt", "receipt", "receipt");
+        Receipt receipt = new Receipt("receipt", "receipt", "receipt", "receipt", "receipt");
         receiptRepository.save(receipt);
         Receipt reReceipt = receiptRepository.findByType("receipt").get(0);
         assertEquals(receipt, reReceipt);
@@ -46,7 +45,7 @@ public class ReceiptRepositoryTest {
     @WithMockUser(username = "vasya")
     public void testFindByName() {
         System.out.println("testFindByName");
-        Receipt receipt = new Receipt("receipt", "receipt", "receipt", "receipt");
+        Receipt receipt = new Receipt("receipt", "receipt", "receipt", "receipt", "receipt");
         receiptRepository.save(receipt);
         Receipt reReceipt = receiptRepository.findByName("receipt").get(0);
         assertEquals(receipt, reReceipt);
@@ -58,7 +57,7 @@ public class ReceiptRepositoryTest {
     @WithMockUser(username = "vasya")
     public void testFindByComponent() {
         System.out.println("testFindByComponent");
-        Receipt receipt = new Receipt("receipt", "receipt", "receipt", "receipt");
+        Receipt receipt = new Receipt("receipt", "receipt", "receipt", "receipt", "receipt");
         receiptRepository.save(receipt);
         Receipt reReceipt = receiptRepository.findByComponent("receipt").get(0);
         assertEquals(receipt, reReceipt);
@@ -70,7 +69,7 @@ public class ReceiptRepositoryTest {
     @WithMockUser(username = "vasya")
     public void testFindByTypeAndName() {
         System.out.println("testFindByTypeAndName");
-        Receipt receipt = new Receipt("receipt", "receipt", "receipt", "receipt");
+        Receipt receipt = new Receipt("receipt", "receipt", "receipt", "receipt", "receipt");
         receiptRepository.save(receipt);
         Receipt reReceipt = receiptRepository.findByTypeAndName("receipt", "receipt").get(0);
         assertEquals(receipt, reReceipt);
@@ -82,7 +81,7 @@ public class ReceiptRepositoryTest {
     @WithMockUser(username = "vasya")
     public void testFindByTypeAndComponent() {
         System.out.println("testFindByTypeAndComponent");
-        Receipt receipt = new Receipt("receipt", "receipt", "receipt", "receipt");
+        Receipt receipt = new Receipt("receipt", "receipt", "receipt", "receipt", "receipt");
         receiptRepository.save(receipt);
         Receipt reReceipt = receiptRepository.findByTypeAndComponent("receipt", "receipt").get(0);
         assertEquals(receipt, reReceipt);
@@ -94,7 +93,7 @@ public class ReceiptRepositoryTest {
     @WithMockUser(username = "vasya")
     public void testFindByNameAndComponent() {
         System.out.println("testFindByNameAndComponent");
-        Receipt receipt = new Receipt("receipt", "receipt", "receipt", "receipt");
+        Receipt receipt = new Receipt("receipt", "receipt", "receipt", "receipt", "receipt");
         receiptRepository.save(receipt);
         Receipt reReceipt = receiptRepository.findByNameAndComponent("receipt", "receipt").get(0);
         assertEquals(receipt, reReceipt);
@@ -106,7 +105,7 @@ public class ReceiptRepositoryTest {
     @WithMockUser(username = "vasya")
     public void testFindByTypeAndNameAndComponent() {
         System.out.println("testFindByTypeAndNameAndComponent");
-        Receipt receipt = new Receipt("receipt", "receipt", "receipt", "receipt");
+        Receipt receipt = new Receipt("receipt", "receipt", "receipt", "receipt", "receipt");
         receiptRepository.save(receipt);
         Receipt reReceipt = receiptRepository.findByTypeAndNameAndComponent("receipt", "receipt", "receipt").get(0);
         assertEquals(receipt, reReceipt);

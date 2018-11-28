@@ -37,7 +37,7 @@ public class ReceiptServiceTest {
 
     @Test
     public void findReceiptTest() {
-        Receipt receipt = new Receipt("receipt", "receipt", "receipt", "receipt");
+        Receipt receipt = new Receipt("receipt", "receipt", "receipt", "receipt", "receipt");
         receiptRepository.save(receipt);
         Map<String, String> map = new HashMap<>();
         map.put("type", "receipt");

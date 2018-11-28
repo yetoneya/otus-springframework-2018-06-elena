@@ -18,30 +18,35 @@
             }
 
             .submit{
+                background: #0b8eb4; 
                 text-align: center;
-                width: 60px;
-                border: 3px solid #bbc8d0;
-
+                width: 45px;
+                border: 2px solid #bbc8d0;
+                border-radius: 5px;              
+                width: 100px;
+            }
+            input{
+                background: #bfccc6;
             }
         </style>
     </head>
     <body> 
-        <h3 th:text="${label}">Log in:</h3>
+        <h3 th:text="#{login}">Log in:</h3>
         <br>
         <form th:action="@{/login}" th:method="post">           
             <div class="row">
-                <label for="username">username:</label>
+                <label for="username" th:text="#{login.username}">Username:</label>
                 <input id="username" type="text" name="username" value=""/>
             </div>
             <br>
             <div class="row">
-                <label for="password">password:</label>
+                <label for="password" th:text="#{login.password}">Password:</label>
                 <input id="password" type="password" name="password" value=""/>
             </div>
             <br><br>
-            <input class="submit" type="submit" value="submit"/>
+            <input class="submit" type="submit" th:value="#{submit}"  value="submit"/>
             <br><br>
-            <p th:text="${message}"></p>
+            <p th:text="${message}"></p>            
         </form>
     </body>
 </html>

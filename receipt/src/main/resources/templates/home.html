@@ -1,4 +1,4 @@
-<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<html  xmlns:th="http://www.thymeleaf.org">
     <head>
         <title>Receipt</title>
         <meta charset="UTF-8">
@@ -11,14 +11,15 @@
             }
             .row {
                 margin-top: 10px;
-                margin-left: 5px;
+                margin-left: 5px;            
             }
         </style>
     </head>
     <body>
         <ul class="row">         
-            <li><a th:href="@{/login}" href="login.html"><h3>sign in</h3></a></li>          
-            <li><a th:href="@{/signup}" href="login.html"><h3>sign up</h3></a></li>
+            <li><a th:href="@{/login}" th:text="#{login}"  href="login.html"><h3>Log in</h3></a></li>          
+            <br>
+            <li><a th:href="@{/signup}" th:text="#{signup}" href="login.html"><h3>Sign up</h3></a></li>
         </ul>
     </body>
 </html>

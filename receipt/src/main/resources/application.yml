@@ -1,8 +1,21 @@
 ## YAML Template.
 ---
+hystrix:
+   shareSecurityContext: true
+management:
+   endpoints:
+      web:
+         exposure:
+            include: 
+              - hystrix.stream             
+              - health
+              - metrics                          
+health:
+   indicator: 
+      enabled: true 
 spring:
    data:      
       mongodb.host: localhost
       mongodb.port: 27017
       mongodb.uri: mongodb://localhost/test
-      
+lang: ru

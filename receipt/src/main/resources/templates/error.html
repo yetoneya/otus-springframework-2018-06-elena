@@ -11,7 +11,7 @@
         </style>
     </head>
     <body>
-        <h3>has not been found</h3>
-        <a th:href="@{/}" href="rlist.html">Home</a>
+        <h3 th:text="#{error.message}">Page has not been found</h3>
+        <a th:href="@{/}" th:text="#{home}" href="rlist.html">Home</a>
     </body>
 </html>
