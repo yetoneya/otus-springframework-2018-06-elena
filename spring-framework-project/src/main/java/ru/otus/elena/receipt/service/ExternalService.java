@@ -10,7 +10,6 @@ public class ExternalService {
 
     @Autowired
     private RestTemplate restTemplate;
-
     private static final String FAILURE_FILE_NAME = "image/cucumber.jpg";
 
     @HystrixCommand(fallbackMethod = "defaultMethod")

@@ -24,7 +24,7 @@ public class ReceiptService {
     public void setCheckPicture(boolean checkPicture) {
         this.checkPicture = checkPicture;
     }
-    
+
     public List<Receipt> findReceipt(Map<String, String> map) {
         if (map.getOrDefault("type", "").equalsIgnoreCase("")) {
             if (map.getOrDefault("name", "").equalsIgnoreCase("")) {

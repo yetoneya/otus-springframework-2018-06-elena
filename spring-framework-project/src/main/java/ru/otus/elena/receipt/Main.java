@@ -72,14 +72,6 @@ public class Main {
                 roleRepository.save(userRole);
             }
 
-            User admin = userService.findByUsername("admin");
-            if (admin == null) {
-                Set<Role> roles = new HashSet<>();
-                roles.add(adminRole);
-                roles.add(userRole);
-                userService.saveUser("admin", "password", roles);
-            }
-
             logger.info(messageSource.getMessage("initialization.success", new String[]{}, Locale.getDefault()));
         } catch (Exception e) {
             logger.error(messageSource.getMessage("initialization.exception", new String[]{e.getMessage()}, Locale.getDefault()));

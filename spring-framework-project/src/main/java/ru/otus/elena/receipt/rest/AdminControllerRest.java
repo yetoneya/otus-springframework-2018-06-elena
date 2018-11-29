@@ -19,9 +19,9 @@ import ru.otus.elena.receipt.service.UserService;
 
 @RestController
 public class AdminControllerRest {
-    
+
     Logger logger = LoggerFactory.getLogger(AdminControllerRest.class);
-    
+
     @Autowired
     private UserService userService;
     @Autowired
@@ -32,7 +32,7 @@ public class AdminControllerRest {
     private ReceiptService receiptService;
     @Autowired
     private MessageConfiguration messageConfiguration;
-    
+
     @RequestMapping("/user/delete")
     public ResponseEntity<List<String>> deleteUser(@RequestParam(value = "id") String id) {
         try {
@@ -49,7 +49,7 @@ public class AdminControllerRest {
             return new ResponseEntity<>(new ArrayList<>(), HttpStatus.OK);
         }
     }
-    
+
     @RequestMapping("/check/picture")
     public ResponseEntity<List<String>> setCheck(@RequestParam(value = "checked") boolean checked) {
         receiptService.setCheckPicture(checked);
@@ -59,7 +59,7 @@ public class AdminControllerRest {
             }
         }, HttpStatus.OK);
     }
-    
+
     @RequestMapping("/change/lang")
     public ResponseEntity<List<String>> changeLang(@RequestParam(value = "lang") String lang) {
         System.out.println(lang);

@@ -1,7 +1,6 @@
 package ru.otus.elena.receipt.rest;
 
 import io.micrometer.core.instrument.Counter;
-import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Locale;
 import org.slf4j.Logger;
@@ -14,7 +13,6 @@ import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
-import ru.otus.elena.receipt.domain.Receipt;
 import ru.otus.elena.receipt.domain.ReceiptDto;
 
 @Controller
@@ -22,12 +20,11 @@ import ru.otus.elena.receipt.domain.ReceiptDto;
 public class ReceiptController {
 
     Logger logger = LoggerFactory.getLogger(ReceiptController.class);
-    private static final String IMAGE="image/trichocereus_hybr.jpg";
+    private static final String IMAGE = "image/cucumber.jpg";
     @Autowired
     private Counter errorCounter;
     @Autowired
     private MessageSource messageSource;
-    
 
     @RequestMapping("/receipt")
     public String startPage(Model model) {

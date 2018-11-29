@@ -8,6 +8,7 @@ $(document).ready(function () {
             dataType: 'json',
             data: {lang: lang},
             success: function (data) {
+                window.location.replace('login?lang=' + lang);
                 window.location.replace('receipt?lang=' + lang);
                 window.location.replace('admin?lang=' + lang);
 
