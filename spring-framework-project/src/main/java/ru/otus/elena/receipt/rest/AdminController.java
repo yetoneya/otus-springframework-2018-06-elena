@@ -16,6 +16,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import ru.otus.elena.receipt.configuration.MessageConfiguration;
 import ru.otus.elena.receipt.dao.RoleRepository;
 import ru.otus.elena.receipt.domain.Role;
 import ru.otus.elena.receipt.domain.User;
@@ -36,15 +37,17 @@ public class AdminController {
     @Autowired
     private Counter warnCounter;
     @Autowired
-    private Timer findAllTimer;
+    private Timer findTimer;
     @Autowired
     private UserService userService;
     @Autowired
     private RoleRepository roleRepository;
     @Autowired
     private MessageSource messageSource;
-       @Autowired
+    @Autowired
     private ReceiptService receiptService;
+    @Autowired
+    MessageConfiguration messageConfiguration;
 
     @GetMapping("/")
     public String homePage() {
@@ -114,7 +117,7 @@ public class AdminController {
 
     @GetMapping("/logout")
     public String logOut(Model model) {
-        loginCounter.increment(-1);
+        loginCounter.increment(-1.0);
         return "login";
     }
 
@@ -122,13 +125,15 @@ public class AdminController {
     public String userList(Model model) {
         try {
             List<User> userlist = userService.findAll();
-            model.addAttribute("check", receiptService.isCheckPicture());
             model.addAttribute("userlist", userlist);
             model.addAttribute("login", String.valueOf(loginCounter.count()));
             model.addAttribute("signup", String.valueOf(signupCounter.count()));
             model.addAttribute("warn", String.valueOf(warnCounter.count()));
             model.addAttribute("error", String.valueOf(errorCounter.count()));
-            model.addAttribute("timer", String.valueOf(findAllTimer.totalTime(TimeUnit.MILLISECONDS)));
+            model.addAttribute("timer", String.valueOf(findTimer.totalTime(TimeUnit.MILLISECONDS)));
+            model.addAttribute("check", receiptService.isCheckPicture());
+            model.addAttribute("en", messageConfiguration.getLang().equalsIgnoreCase("en"));
+            model.addAttribute("ru", messageConfiguration.getLang().equalsIgnoreCase("ru"));
             logger.info(messageSource.getMessage("userlist.success", new String[]{}, Locale.getDefault()));
             return "admin";
         } catch (Exception e) {

@@ -56,7 +56,10 @@
                 padding-left: 20px;
             }
             #result{
-               margin-left: 20px; 
+                margin-left: 20px; 
+            }
+            #change-lang{
+                margin-left: 16px; 
             }
 
             ::-webkit-scrollbar{
@@ -108,10 +111,17 @@
         <div>                               
             <p><input id="check-picture"  th:checked="${check} ? 'checked'" name ="check-picture" type="checkbox" th:text="#{admin.check}"/></p>
         </div>
+        <br>
+        <form id="change-lang">   
+            <p><input type="radio" name="lang" id="lang-en" th:checked="${en}? 'checked'" th:text="#{admin.en}" value="en"/></p>
+            <p><input type="radio" name="lang" id="lang-ru" th:checked="${ru}? 'checked'" th:text="#{admin.ru}" value="ru"/></p>
+            <p><input type="submit" class="submit" th:value = "#{submit}" value="submit"/></p>                          
+        </form>
         <p id ="result"></p>
         <script type="text/javascript" src="webjars/jquery/2.2.4/jquery.min.js"></script>
         <script type="text/javascript" src="js/userdelete.js"></script>
         <script type="text/javascript" src="js/userselect.js"></script>
         <script type="text/javascript" src="js/checkpicture.js"></script>
+        <script type="text/javascript" src="js/changelang.js"></script>
     </body>
 </html>

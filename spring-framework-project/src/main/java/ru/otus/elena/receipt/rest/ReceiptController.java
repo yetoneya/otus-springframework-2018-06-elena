@@ -22,12 +22,12 @@ import ru.otus.elena.receipt.domain.ReceiptDto;
 public class ReceiptController {
 
     Logger logger = LoggerFactory.getLogger(ReceiptController.class);
-
+    private static final String IMAGE="image/trichocereus_hybr.jpg";
     @Autowired
     private Counter errorCounter;
-        @Autowired
+    @Autowired
     private MessageSource messageSource;
-
+    
 
     @RequestMapping("/receipt")
     public String startPage(Model model) {
@@ -42,8 +42,8 @@ public class ReceiptController {
                     break;
                 }
             }
-            ReceiptDto receipt = new ReceiptDto("", "", "", "", "","");
-            receipt.setImage("image/cucumber.jpg");
+            ReceiptDto receipt = new ReceiptDto("", "", "", "", "", "");
+            receipt.setImage(IMAGE);
             receipt.setUrl("");
             model.addAttribute("receipt", receipt);
             model.addAttribute("admin", isAdmin);

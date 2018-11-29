@@ -55,7 +55,7 @@
 
             select{
                 background:  #bfccc6;
-                min-width: 500px;
+                min-width: 480px;
                 border: 3px solid #bbc8d0;
                 border-radius: 5px;
 
@@ -63,7 +63,7 @@
             textarea{
                 background:  #bfccc6;
                 border: 3px solid #bbc8d0;
-                min-height: 460px;
+                min-height: 450px;
                 min-width: 630px;
                 width: 100%;
                 resize: none;
@@ -77,6 +77,10 @@
 
             #logout{
                 margin-left: 36px;
+            }
+            #result{
+                text-align: start;
+                vertical-align: central;
             }
         </style>
     </head>
@@ -93,56 +97,7 @@
                 </td>
                 <td>
                     <div>
-                        <h3 th:text="#{receipt.find}">Find receipt:</h3>
-                        <form id="find-form">                
-                            <div class="row">
-                                <label for="find-type" th:text="#{receipt.bytype}">By type:</label>
-                                <input id="find-type" class="edit" type="text" value="салат"/>
-                            </div>
-                            <br>
-                            <div class="row">
-                                <label for="find-name" th:text="#{receipt.byname}">By name:</label>
-                                <input id="find-name" class="edit" type="text" value=""/>
-                            </div>
-                            <br>
-                            <div class="row"> 
-                                <label for="find-component" th:text="#{receipt.bycomponent}">By component:</label>
-                                <input id="find-component" class="edit" type="text" value=""/>
-                            </div>
-                            <br> 
-                            <br> 
-                            <input id ="find-input" class="submit" type="submit" th:value="#{find}" value="find"/>                         
-                        </form> 
-                    </div>
-                </td>
-            </tr>
-            <tr>
-                <td>
-                    <div>       
-                        <h3 th:text="#{receipt.select}">Select:</h3>                     
-                        <select id="receipt-list" name="reseipt-list" size="10">                      
-                            <option th:each="receipt : ${receipts}"
-                                    th:value="${receipt.id}"
-                                    th:text="${receipt.type}+', '+${receipt.name}+', '+${receipt.components}"></option>              
-                        </select>
-                    </div>
-                    <br>
-                    <br> 
-                    <div>
-                        <input th:if="${admin}" id="delete-button" name="delete-button" class="submit" type="button" th:value="#{delete}" value ="delete" disabled="disabled"/>
-                    </div> 
-                </td>
-            </tr>
-            <tr>
-                <td>
-                    <br><br>
-                    <form id="im" th:object="${receipt}">
-                        <img id="photo" th:src="*{image}" width="230" height="230" src="cucumber.jpg"/> 
-                    </form>
-                </td>
-                <td>
-                    <div>
-                        <h3 th:text="#{receipt.add}">Add receipt:</h3>
+                        <h3 th:text="#{receipt.add}">Add receipt tags:</h3>
                         <form id="save-form">                
                             <div class="row">
                                 <label for="save-type" th:text="#{receipt.type}">Type:</label>
@@ -166,9 +121,58 @@
                             <br>
                             <br> 
                             <input id="save-input" class="submit" type="submit" th:value="#{save}" value="save" disabled="disabled"/>  <input id="reset-input" class="submit" type="reset" th:value="#{reset}" value="reset"/>                        
-                        </form>
-                        <p id ="result"></p>
+                        </form>                      
                     </div>  
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <div>
+                        <h3 th:text="#{receipt.find}">Find receipt by tags:</h3>
+                        <form id="find-form">                
+                            <div class="row">
+                                <label for="find-type" th:text="#{receipt.bytype}">By type:</label>
+                                <input id="find-type" class="edit" type="text" value="салат"/>
+                            </div>
+                            <br>
+                            <div class="row">
+                                <label for="find-name" th:text="#{receipt.byname}">By name:</label>
+                                <input id="find-name" class="edit" type="text" value=""/>
+                            </div>
+                            <br>
+                            <div class="row"> 
+                                <label for="find-component" th:text="#{receipt.bycomponent}">By component:</label>
+                                <input id="find-component" class="edit" type="text" value=""/>
+                            </div>
+                            <br> 
+                            <br> 
+                            <input id ="find-input" class="submit" type="submit" th:value="#{find}" value="find"/>                         
+                        </form>
+                    </div>
+                    <br>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <br><br>                  
+                    <form id="im" th:object="${receipt}">
+                        <img id="photo" th:src="*{image}" width="230" height="220" src="cucumber.jpg"/> 
+                    </form>
+                    <p id="result"></p>
+                </td>
+                <td>
+                    <div>       
+                        <h3 th:text="#{receipt.select}">Search results:</h3>                     
+                        <select id="receipt-list" name="reseipt-list" size="10">                      
+                            <option th:each="receipt : ${receipts}"
+                                    th:value="${receipt.id}"
+                                    th:text="${receipt.type}+', '+${receipt.name}+', '+${receipt.components}"></option>              
+                        </select>
+                    </div>
+                    <br><br>  
+                    <div>
+                        <input th:if="${admin}" id="delete-button" name="delete-button" class="submit" type="button" th:value="#{delete}" value ="delete" disabled="disabled"/>
+                    </div>                  
                 </td>
             </tr>
         </table>       

@@ -23,6 +23,7 @@ import ru.otus.elena.receipt.service.UserService;
 import org.springframework.cloud.client.circuitbreaker.EnableCircuitBreaker;
 import org.springframework.context.MessageSource;
 import ru.otus.elena.receipt.actuator.HealthCheck;
+import ru.otus.elena.receipt.configuration.MessageConfiguration;
 
 @ConfigurationProperties("application")
 @SpringBootApplication
@@ -41,11 +42,9 @@ public class Main {
     @Autowired
     private RoleRepository roleRepository;
     @Autowired
-    private ReceiptRepository receiptRepository;
-    @Autowired
-    private UserRepository userRepository;
-    @Autowired
     private HealthCheck healthCheck;
+    @Autowired
+    private MessageConfiguration messageConfiguration;
     @Value("${lang}")
     private String lang;
 
@@ -57,16 +56,8 @@ public class Main {
     @SuppressWarnings("SpringJavaAutowiredFieldsWarningInspection")
     @PostConstruct
     public void init() {
-        if (lang.equalsIgnoreCase("en")) {
-            Locale.setDefault(Locale.ENGLISH);
-        } else {
-            Locale.setDefault(new Locale("ru", "RU"));
-        }
+        messageConfiguration.setLang(lang);
         try {
-            //receiptRepository.deleteAll();
-            //roleRepository.deleteAll();
-            //userRepository.deleteAll();
-
             Role adminRole = roleRepository.findByRole("ROLE_ADMIN");
             if (adminRole == null) {
                 adminRole = new Role();

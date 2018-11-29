@@ -13,6 +13,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
+import ru.otus.elena.receipt.configuration.MessageConfiguration;
 import ru.otus.elena.receipt.service.ReceiptService;
 import ru.otus.elena.receipt.service.UserService;
 
@@ -29,6 +30,8 @@ public class AdminControllerRest {
     private MessageSource messageSource;
     @Autowired
     private ReceiptService receiptService;
+    @Autowired
+    private MessageConfiguration messageConfiguration;
     
     @RequestMapping("/user/delete")
     public ResponseEntity<List<String>> deleteUser(@RequestParam(value = "id") String id) {
@@ -46,7 +49,7 @@ public class AdminControllerRest {
             return new ResponseEntity<>(new ArrayList<>(), HttpStatus.OK);
         }
     }
-
+    
     @RequestMapping("/check/picture")
     public ResponseEntity<List<String>> setCheck(@RequestParam(value = "checked") boolean checked) {
         receiptService.setCheckPicture(checked);
@@ -57,4 +60,14 @@ public class AdminControllerRest {
         }, HttpStatus.OK);
     }
     
+    @RequestMapping("/change/lang")
+    public ResponseEntity<List<String>> changeLang(@RequestParam(value = "lang") String lang) {
+        System.out.println(lang);
+        messageConfiguration.setLang(lang);
+        return new ResponseEntity<>(new ArrayList<String>() {
+            {
+                add("lang changed");
+            }
+        }, HttpStatus.OK);
+    }
 }
