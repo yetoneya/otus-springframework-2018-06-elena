@@ -1,0 +1,25 @@
+## YAML Template.
+---
+version: '3.1'
+
+services:
+  spring-docker:
+    build: .
+   
+    restart: always
+    container_name: spring-docker
+    ports:
+      - 9090:9090
+    
+    depends_on:
+      - mongo
+  
+  mongo:
+    image: mongo
+    container_name: spring-docker-mongo
+    ports: 
+      - 27017:27017
+    volumes:
+      - $HOME/data/spring-project-mongo-data:/data/db
+      - $HOME/data/spring-project-mongo-bkp:/data/bkp
+    restart: always

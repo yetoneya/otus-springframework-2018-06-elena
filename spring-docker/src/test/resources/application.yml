@@ -1,0 +1,11 @@
+## YAML Template.
+---
+health:
+   indicator: 
+      enabled: true  
+spring:
+   data:      
+      mongodb.host: localhost
+      mongodb.port: 0
+      mongodb.uri: mongodb://localhost/test
+lang: ru      
